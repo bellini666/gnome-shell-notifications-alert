@@ -1,0 +1,13 @@
+{
+  "shell-version": [
+    "3.2",
+    "3.4"
+  ],
+  "uuid": "notifications-alert-on-user-menu@hackedbellini.gmail.com",
+  "name": "Notifications Alert on User Menu",
+  "original-authors": [
+    "Thiago Bellini"
+  ],
+  "description": "Whenever there is an unread notification (i.e. IM Messages), paint the user's menu message red.",
+  "version": 1.0
+}
