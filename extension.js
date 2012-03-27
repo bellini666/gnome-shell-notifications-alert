@@ -26,7 +26,7 @@ const Lang = imports.lang;
 const Main = imports.ui.main;
 const MessageTray = imports.ui.messageTray;
 
-let userMenu, messageStyleHandler;
+let userMenu, notificationsSwitch, messageStyleHandler;
 let originalSetCount, originalDestroy;
 
 function _MessageStyleHandler() {
@@ -38,25 +38,33 @@ function _MessageStyleHandler() {
   */
 
   this.enable = function() {
+    this.notificationsSwitchToggledSignal = notificationsSwitch.connect(
+        'toggled', Lang.bind(this, this._onNotificationsSwitchToggled));
+
     // Check for existing message counters when extension were
     // loaded on an already running shell.
     this.updateMessageStyle();
   }
 
   this.disable = function() {
+    notificationsSwitch.disconnect(this.notificationsSwitchToggledSignal);
+
     this._removeMessageStyle();
   }
 
   this.updateMessageStyle = function() {
     let items = Main.messageTray._summaryItems;
 
-    for (let i = 0; i < items.length; i++) {
-      let s = items[i].source;
-      if (s._counterBin.visible && s._counterLabel.get_text() != '0') {
-        // If any source has a counter label different than '0',
-        // we will add the style to notify the user.
-        this._addMessageStyle();
-        return;
+    if (notificationsSwitch._switch.state) {
+      // Only do this if the user wants to see notifications
+      for (let i = 0; i < items.length; i++) {
+        let s = items[i].source;
+        if (s._counterBin.visible && s._counterLabel.get_text() != '0') {
+          // If any source has a counter label different than '0',
+          // we will add the style to notify the user.
+          this._addMessageStyle();
+          return;
+        }
       }
     }
     // If for above ended without adding the style, that means there's
@@ -67,6 +75,10 @@ function _MessageStyleHandler() {
   /*
      Private
   */
+
+  this._onNotificationsSwitchToggled = function(item, event) {
+    this.updateMessageStyle();
+  }
 
   this._addMessageStyle = function() {
     if (this.hasStyleAdded) {
@@ -110,6 +122,7 @@ function init() {
   originalDestroy = MessageTray.Source.prototype.destroy;
 
   userMenu = Main.panel._statusArea.userMenu;
+  notificationsSwitch = userMenu._notificationsSwitch;
 
   messageStyleHandler = new _MessageStyleHandler();
 }
