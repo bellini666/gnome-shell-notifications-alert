@@ -90,15 +90,13 @@ function _MessageStyleHandler() {
 */
 
 function _setCount(count, visible) {
-  let fallbackSetCount = Lang.bind(this, originalSetCount);
-  fallbackSetCount(count, visible);
+  originalSetCount.call(this, count, visible);
 
   messageStyleHandler.updateMessageStyle();
 }
 
 function _destroy() {
-  let fallbackDestroy = Lang.bind(this, originalDestroy);
-  fallbackDestroy();
+  originalDestroy.call(this);
 
   messageStyleHandler.updateMessageStyle();
 }
