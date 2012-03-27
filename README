@@ -1,0 +1,11 @@
+Notifications Alert on User Menu by Thiago Bellini <hackedbellini@gmail.com>
+
+Description:
+  * Whenever there is an unread notification (i.e. IM Messages), paint the
+    user's menu message red.
+
+How to use:
+  * Simply go to the extension page on gnome.extensions and activate it:
+    https://extensions.gnome.org/extension/258/notifications-alert-on-user-menu/
+
+Want to improve this extension? Fork it and send me a pull request ;D
