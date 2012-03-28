@@ -5,11 +5,11 @@
     "3.4"
   ],
   "uuid": "notifications-alert-on-user-menu@hackedbellini.gmail.com",
-  "name": "Notifications Alert on User Menu",
+  "name": "Notifications Alert",
   "original-authors": [
     "Thiago Bellini"
   ],
-  "description": "Whenever there is an unread notification (i.e. IM Messages), paint the user's menu message red.",
-  "url": "https://github.com/hackedbellini/Gnome-Shell-Notifications-Alert-on-User-Menu",
+  "description": "Whenever there is an unread notification (e.g. IM Messages), paint the user's menu message red.",
+  "url": "https://github.com/hackedbellini/Gnome-Shell-Notifications-Alert",
   "version": 1
 }
