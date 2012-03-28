@@ -9,7 +9,7 @@
   "original-authors": [
     "Thiago Bellini"
   ],
-  "description": "Whenever there is an unread notification (e.g. IM Messages), paint the user's menu message red.",
+  "description": "Whenever there is an unread notification (e.g. IM Messages), paints red the message in the user's menu.",
   "url": "https://github.com/hackedbellini/Gnome-Shell-Notifications-Alert",
   "version": 1
 }
