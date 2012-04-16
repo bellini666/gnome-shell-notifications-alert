@@ -26,7 +26,7 @@ const Lang = imports.lang;
 const Main = imports.ui.main;
 const MessageTray = imports.ui.messageTray;
 
-let userMenu, notificationsSwitch, messageStyleHandler;
+let messageStyleHandler;
 let originalSetCount, originalDestroy;
 
 function _MessageStyleHandler() {
@@ -38,6 +38,7 @@ function _MessageStyleHandler() {
   */
 
   this.enable = function() {
+    let notificationsSwitch = Main.panel._statusArea.userMenu._notificationsSwitch;
     this.notificationsSwitchToggledSignal = notificationsSwitch.connect(
         'toggled', Lang.bind(this, this._onNotificationsSwitchToggled));
 
@@ -47,12 +48,14 @@ function _MessageStyleHandler() {
   }
 
   this.disable = function() {
+    let notificationsSwitch = Main.panel._statusArea.userMenu._notificationsSwitch;
     notificationsSwitch.disconnect(this.notificationsSwitchToggledSignal);
 
     this._removeMessageStyle();
   }
 
   this.updateMessageStyle = function() {
+    let notificationsSwitch = Main.panel._statusArea.userMenu._notificationsSwitch;
     let items = Main.messageTray._summaryItems;
 
     if (notificationsSwitch._switch.state) {
@@ -84,6 +87,8 @@ function _MessageStyleHandler() {
     if (this.hasStyleAdded) {
       return;
     }
+
+    let userMenu = Main.panel._statusArea.userMenu;
     userMenu._iconBox.add_style_class_name('has-message-count-style');
     this.hasStyleAdded = true;
   }
@@ -92,6 +97,8 @@ function _MessageStyleHandler() {
     if (! this.hasStyleAdded) {
       return;
     }
+
+    let userMenu = Main.panel._statusArea.userMenu;
     userMenu._iconBox.remove_style_class_name('has-message-count-style');
     this.hasStyleAdded = false;
   }
@@ -118,16 +125,13 @@ function _destroy() {
 */
 
 function init() {
-  originalSetCount = MessageTray.Source.prototype._setCount;
-  originalDestroy = MessageTray.Source.prototype.destroy;
-
-  userMenu = Main.panel._statusArea.userMenu;
-  notificationsSwitch = userMenu._notificationsSwitch;
-
   messageStyleHandler = new _MessageStyleHandler();
 }
 
 function enable() {
+  originalSetCount = MessageTray.Source.prototype._setCount;
+  originalDestroy = MessageTray.Source.prototype.destroy;
+
   MessageTray.Source.prototype._setCount = _setCount;
   MessageTray.Source.prototype.destroy = _destroy;
 
