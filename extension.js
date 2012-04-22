@@ -137,10 +137,11 @@ function _destroy() {
 */
 
 function init() {
-  messageStyleHandler = new _MessageStyleHandler();
 }
 
 function enable() {
+  messageStyleHandler = new _MessageStyleHandler();
+
   originalPushNotification = MessageTray.Source.prototype.pushNotification;
   originalSetCount = MessageTray.Source.prototype._setCount;
   originalDestroy = MessageTray.Source.prototype.destroy;
