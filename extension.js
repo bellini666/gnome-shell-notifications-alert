@@ -71,8 +71,13 @@ function _MessageStyleHandler() {
         }
         if (!s.isChat && s.notifications.length > 0) {
           // Workaround to alert for 'notify-send' notifications alike
-          this._addMessageStyle();
-          return;
+          for (let n = 0; n < s.notifications.length; n++) {
+            if (!s.notifications[n].resident) {
+              // Do not alert resident notifications (like Rhythmbox ones)
+              this._addMessageStyle();
+              return;
+            }
+          }
         }
       }
     }
