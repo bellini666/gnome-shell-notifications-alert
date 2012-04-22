@@ -62,9 +62,15 @@ function _MessageStyleHandler() {
       // Only do this if the user wants to see notifications
       for (let i = 0; i < items.length; i++) {
         let s = items[i].source;
+
         if (s._counterBin.visible && s._counterLabel.get_text() != '0') {
           // If any source has a counter label different than '0',
           // we will add the style to notify the user.
+          this._addMessageStyle();
+          return;
+        }
+        if (!s.isChat && s.notifications.length > 0) {
+          // Workaround to alert for 'notify-send' notifications alike
           this._addMessageStyle();
           return;
         }
@@ -108,6 +114,12 @@ function _MessageStyleHandler() {
    Monkey-patchs for MessageTray.Source
 */
 
+function _pushNotification(notification) {
+  originalPushNotification.call(this, notification);
+
+  messageStyleHandler.updateMessageStyle();
+}
+
 function _setCount(count, visible) {
   originalSetCount.call(this, count, visible);
 
@@ -129,9 +141,11 @@ function init() {
 }
 
 function enable() {
+  originalPushNotification = MessageTray.Source.prototype.pushNotification;
   originalSetCount = MessageTray.Source.prototype._setCount;
   originalDestroy = MessageTray.Source.prototype.destroy;
 
+  MessageTray.Source.prototype.pushNotification = _pushNotification;
   MessageTray.Source.prototype._setCount = _setCount;
   MessageTray.Source.prototype.destroy = _destroy;
 
@@ -139,6 +153,7 @@ function enable() {
 }
 
 function disable() {
+  MessageTray.Source.prototype.pushNotification = originalPushNotification;
   MessageTray.Source.prototype._setCount = originalSetCount;
   MessageTray.Source.prototype.destroy = originalDestroy;
 
