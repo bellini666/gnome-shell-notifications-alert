@@ -16,7 +16,7 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * Some parts of this code were forked from:
- *   git://git.collabora.co.uk/git/user/bari/shell-message-notifier.git
+ *   https://extensions.gnome.org/extension/150/message-notifier/
  * The idea of setting the menu red were inspired by:
  *   https://extensions.gnome.org/extension/170/pidgin-peristent-notification
  *
