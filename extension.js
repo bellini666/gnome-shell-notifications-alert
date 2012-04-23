@@ -15,9 +15,9 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * Some parts of this code were forked from:
+ * Some parts of this code were forked from message-notifier:
  *   https://extensions.gnome.org/extension/150/message-notifier/
- * The idea of setting the menu red were inspired by:
+ * The idea of setting the menu red were inspired by pidgin-persistent-notification:
  *   https://extensions.gnome.org/extension/170/pidgin-peristent-notification
  *
  */
@@ -26,9 +26,15 @@ const Lang = imports.lang;
 const Main = imports.ui.main;
 const MessageTray = imports.ui.messageTray;
 
+const ExtensionUtils = imports.misc.extensionUtils;
+const Me = ExtensionUtils.getCurrentExtension();
+const Lib = Me.imports.lib;
+
+const SETTING_ALERT_ALL = 'alertall';
+const SETTING_FORCE = 'force';
 const STYLE_CLASS = 'has-message-count-style';
 
-let messageStyleHandler;
+let settings, messageStyleHandler;
 let originalPushNotification, originalSetCount, originalDestroy;
 
 function _MessageStyleHandler() {
@@ -41,6 +47,13 @@ function _MessageStyleHandler() {
     let notificationsSwitch = Main.panel._statusArea.userMenu._notificationsSwitch;
     this.notificationsSwitchToggledSignal = notificationsSwitch.connect(
         'toggled', Lang.bind(this, this._onNotificationsSwitchToggled));
+
+    // Connect settings change events, so we can update message style
+    // as soon as the user makes the change
+    settings.connect("changed::" + SETTING_ALERT_ALL,
+                     Lang.bind(this, this._onSettingsChanged));
+    settings.connect("changed::" + SETTING_FORCE,
+                     Lang.bind(this, this._onSettingsChanged));
 
     // Check for existing message counters when extension were
     // loaded on an already running shell.
@@ -58,26 +71,15 @@ function _MessageStyleHandler() {
     let notificationsSwitch = Main.panel._statusArea.userMenu._notificationsSwitch;
     let items = Main.messageTray._summaryItems;
 
-    if (notificationsSwitch._switch.state) {
-      // Only do this if the user wants to see notifications
+    if (settings.get_boolean(SETTING_FORCE) ||
+        notificationsSwitch._switch.state) {
       for (let i = 0; i < items.length; i++) {
-        let s = items[i].source;
+        let source = items[i].source;
 
-        if (s._counterBin.visible && s._counterLabel.get_text() != '0') {
-          // If any source has a counter label different than '0',
-          // we will add the style to notify the user.
+        if (this._hasImNotifications(source) ||
+            this._hasSystemNotifications(source)) {
           this._addMessageStyle();
           return;
-        }
-        if (!s.isChat && s.notifications.length > 0) {
-          // Workaround to alert for 'notify-send' notifications alike
-          for (let n = 0; n < s.notifications.length; n++) {
-            if (!s.notifications[n].resident) {
-              // Do not alert resident notifications (like Rhythmbox ones)
-              this._addMessageStyle();
-              return;
-            }
-          }
         }
       }
     }
@@ -90,8 +92,27 @@ function _MessageStyleHandler() {
      Private
   */
 
-  this._onNotificationsSwitchToggled = function(item, event) {
-    this.updateMessageStyle();
+  this._hasImNotifications = function(source) {
+    if (source._counterBin.visible && source._counterLabel.get_text() != '0') {
+      return true;
+    }
+    return false;
+  }
+
+  this._hasSystemNotifications = function(source) {
+    if (!settings.get_boolean(SETTING_ALERT_ALL)) {
+      return false;
+    }
+
+    if (!source.isChat && source.notifications.length > 0) {
+      for (let n = 0; n < source.notifications.length; n++) {
+        if (!source.notifications[n].resident) {
+          // Do not alert resident notifications (like Rhythmbox ones)
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
   this._addMessageStyle = function() {
@@ -110,6 +131,18 @@ function _MessageStyleHandler() {
     }
 
     userMenu._iconBox.remove_style_class_name(STYLE_CLASS);
+  }
+
+  /*
+     Callbacks
+  */
+
+  this._onSettingsChanged = function() {
+    this.updateMessageStyle();
+  }
+
+  this._onNotificationsSwitchToggled = function(item, event) {
+    this.updateMessageStyle();
   }
 }
 
@@ -140,6 +173,8 @@ function _destroy() {
 */
 
 function init() {
+  Lib.initTranslations(Me);
+  settings = Lib.getSettings(Me);
 }
 
 function enable() {

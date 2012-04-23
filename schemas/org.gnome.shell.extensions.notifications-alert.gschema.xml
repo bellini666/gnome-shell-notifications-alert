@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="gnome-shell-notifications-alert">
+  <schema path="/org/gnome/shell/extensions/notifications-alert/" id="org.gnome.shell.extensions.notifications-alert">
+    <key name="alertall" type="b">
+      <default>true</default>
+      <summary>Alert for non-chat notifications (without counters) too.</summary>
+      <description>Alert for non-chat notifications (without counters) too.</description>
+    </key>
+    <key name="force" type="b">
+      <default>false</default>
+      <summary>Force alerting even if notifications are set to off.</summary>
+      <description>Force alerting even if notifications are set to off.</description>
+    </key>
+  </schema>
+</schemalist>
