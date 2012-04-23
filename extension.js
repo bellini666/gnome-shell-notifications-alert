@@ -29,7 +29,7 @@ const MessageTray = imports.ui.messageTray;
 const STYLE_CLASS = 'has-message-count-style';
 
 let messageStyleHandler;
-let originalSetCount, originalDestroy;
+let originalPushNotification, originalSetCount, originalDestroy;
 
 function _MessageStyleHandler() {
 
