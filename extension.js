@@ -26,12 +26,12 @@ const Lang = imports.lang;
 const Main = imports.ui.main;
 const MessageTray = imports.ui.messageTray;
 
+const STYLE_CLASS = 'has-message-count-style';
+
 let messageStyleHandler;
 let originalSetCount, originalDestroy;
 
 function _MessageStyleHandler() {
-
-  this.hasStyleAdded = false;
 
   /*
      Public API
@@ -95,23 +95,21 @@ function _MessageStyleHandler() {
   }
 
   this._addMessageStyle = function() {
-    if (this.hasStyleAdded) {
+    let userMenu = Main.panel._statusArea.userMenu;
+    if (userMenu._iconBox.has_style_class_name(STYLE_CLASS)) {
       return;
     }
 
-    let userMenu = Main.panel._statusArea.userMenu;
-    userMenu._iconBox.add_style_class_name('has-message-count-style');
-    this.hasStyleAdded = true;
+    userMenu._iconBox.add_style_class_name(STYLE_CLASS);
   }
 
   this._removeMessageStyle = function() {
-    if (! this.hasStyleAdded) {
+    let userMenu = Main.panel._statusArea.userMenu;
+    if (!userMenu._iconBox.has_style_class_name(STYLE_CLASS)) {
       return;
     }
 
-    let userMenu = Main.panel._statusArea.userMenu;
-    userMenu._iconBox.remove_style_class_name('has-message-count-style');
-    this.hasStyleAdded = false;
+    userMenu._iconBox.remove_style_class_name(STYLE_CLASS);
   }
 }
 
