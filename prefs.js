@@ -44,6 +44,11 @@ function _createBoolSetting(setting) {
     settings.set_boolean(setting, button.active);
   });
 
+  if (boolSettings[setting].help) {
+    settingLabel.set_tooltip_text(boolSettings[setting].help);
+    settingSwitch.set_tooltip_text(boolSettings[setting].help);
+  }
+
   hbox.pack_start(settingLabel, true, true, 0);
   hbox.add(settingSwitch);
 
@@ -59,8 +64,14 @@ function init() {
   settings = Lib.getSettings(Me);
 
   boolSettings = {
-    alertall: {label: _("Alert for non-chat notifications (without counters) too")},
-    force:    {label: _("Force alerting even when notifications are set to off")},
+    chatonly: {
+      label: _("Only alert for chat notifications."),
+      help: _("Only chat notifications (like Empathy ones) will get alerted (default: OFF)")
+    },
+    force: {
+      label: _("Force alerting even when notifications are set to OFF."),
+      help: _("Alert even if you set notifications to OFF on user menu (default: OFF)")
+    },
   };
 }
 

@@ -30,7 +30,7 @@ const ExtensionUtils = imports.misc.extensionUtils;
 const Me = ExtensionUtils.getCurrentExtension();
 const Lib = Me.imports.lib;
 
-const SETTING_ALERT_ALL = 'alertall';
+const SETTING_CHAT_ONLY = 'chatonly';
 const SETTING_FORCE = 'force';
 const STYLE_CLASS = 'has-message-count-style';
 
@@ -50,7 +50,7 @@ function _MessageStyleHandler() {
 
     // Connect settings change events, so we can update message style
     // as soon as the user makes the change
-    settings.connect("changed::" + SETTING_ALERT_ALL,
+    settings.connect("changed::" + SETTING_CHAT_ONLY,
                      Lang.bind(this, this._onSettingsChanged));
     settings.connect("changed::" + SETTING_FORCE,
                      Lang.bind(this, this._onSettingsChanged));
@@ -73,11 +73,16 @@ function _MessageStyleHandler() {
 
     if (settings.get_boolean(SETTING_FORCE) ||
         notificationsSwitch._switch.state) {
+      let chatOnly = settings.get_boolean(SETTING_CHAT_ONLY);
+
       for (let i = 0; i < items.length; i++) {
         let source = items[i].source;
 
-        if (this._hasImNotifications(source) ||
-            this._hasSystemNotifications(source)) {
+        if (chatOnly && !source.isChat) {
+          // The user choose to only be alerted by real chat notifications
+          continue;
+        }
+        if (this._hasNotifications(source)) {
           this._addMessageStyle();
           return;
         }
@@ -92,24 +97,15 @@ function _MessageStyleHandler() {
      Private
   */
 
-  this._hasImNotifications = function(source) {
-    if (source._counterBin.visible && source._counterLabel.get_text() != '0') {
+  this._hasNotifications = function(source) {
+    if (source._counterBin.visible &&
+        source._counterLabel.get_text() != '0') {
       return true;
     }
-    return false;
-  }
-
-  this._hasSystemNotifications = function(source) {
-    if (!settings.get_boolean(SETTING_ALERT_ALL)) {
-      return false;
-    }
-
-    if (!source.isChat && source.notifications.length > 0) {
-      for (let n = 0; n < source.notifications.length; n++) {
-        if (!source.notifications[n].resident) {
-          // Do not alert resident notifications (like Rhythmbox ones)
-          return true;
-        }
+    for (let n = 0; n < source.notifications.length; n++) {
+      if (!source.notifications[n].resident) {
+        // Do not alert resident notifications (like Rhythmbox ones)
+        return true;
       }
     }
     return false;
