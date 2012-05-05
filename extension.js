@@ -30,14 +30,17 @@ const ExtensionUtils = imports.misc.extensionUtils;
 const Me = ExtensionUtils.getCurrentExtension();
 const Lib = Me.imports.lib;
 
+const SETTING_COLOR = 'color';
 const SETTING_CHAT_ONLY = 'chatonly';
 const SETTING_FORCE = 'force';
-const STYLE_CLASS = 'has-message-count-style';
 
 let settings, messageStyleHandler;
 let originalPushNotification, originalSetCount, originalDestroy;
 
 function _MessageStyleHandler() {
+
+  this._oldStyle = null;
+  this._hasStyleAdded = false;
 
   /*
      Public API
@@ -50,6 +53,8 @@ function _MessageStyleHandler() {
 
     // Connect settings change events, so we can update message style
     // as soon as the user makes the change
+    settings.connect("changed::" + SETTING_COLOR,
+                     Lang.bind(this, this._onSettingsChanged));
     settings.connect("changed::" + SETTING_CHAT_ONLY,
                      Lang.bind(this, this._onSettingsChanged));
     settings.connect("changed::" + SETTING_FORCE,
@@ -113,20 +118,29 @@ function _MessageStyleHandler() {
 
   this._addMessageStyle = function() {
     let userMenu = Main.panel._statusArea.userMenu;
-    if (userMenu._iconBox.has_style_class_name(STYLE_CLASS)) {
-      return;
+    let color = settings.get_string(SETTING_COLOR);
+
+    if (!this._hasStyleAdded) {
+      // Only cache oldStyle when when adding style the first time.
+      // Do this to support change the notification color as soon the
+      // setting changes.
+      this._oldStyle = userMenu._iconBox.get_style();
     }
 
-    userMenu._iconBox.add_style_class_name(STYLE_CLASS);
+    userMenu._iconBox.set_style("color: " + color);
+    this._hasStyleAdded = true;
   }
 
   this._removeMessageStyle = function() {
-    let userMenu = Main.panel._statusArea.userMenu;
-    if (!userMenu._iconBox.has_style_class_name(STYLE_CLASS)) {
+    if (!this._hasStyleAdded) {
       return;
     }
 
-    userMenu._iconBox.remove_style_class_name(STYLE_CLASS);
+    let userMenu = Main.panel._statusArea.userMenu;
+
+    userMenu._iconBox.style = this._oldStyle;
+    this._oldStyle = null;
+    this._hasStyleAdded = false;
   }
 
   /*

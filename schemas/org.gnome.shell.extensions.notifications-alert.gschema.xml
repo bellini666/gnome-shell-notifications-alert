@@ -11,5 +11,10 @@
       <summary>Only alert for chat notifications</summary>
       <description>Only chat notifications (like Empathy ones) will get alerted</description>
     </key>
+    <key name="color" type="s">
+      <default>'#ff0000'</default>
+      <summary>Alert color</summary>
+      <description>The color used to paint the message on user's menu</description>
+    </key>
   </schema>
 </schemalist>

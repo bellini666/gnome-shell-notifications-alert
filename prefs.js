@@ -32,6 +32,7 @@ const Lib = Me.imports.lib;
 
 let settings;
 let boolSettings;
+let colorSettings;
 
 function _createBoolSetting(setting) {
   let hbox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL});
@@ -55,6 +56,31 @@ function _createBoolSetting(setting) {
   return hbox;
 }
 
+function _createColorSetting(setting) {
+  let hbox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL});
+
+  let settingLabel = new Gtk.Label({label: colorSettings[setting].label,
+                                    xalign: 0});
+
+  let color = Lib.getColorByHexadecimal(settings.get_string(setting));
+  let colorButton = new Gtk.ColorButton();
+  colorButton.set_color(color);
+  colorButton.connect('notify::color', function(button) {
+    let hex = Lib.getHexadecimalByColor(button.get_color());
+    settings.set_string(setting, hex);
+  });
+
+  if (colorSettings[setting].help) {
+    settingLabel.set_tooltip_text(colorSettings[setting].help);
+    colorButton.set_tooltip_text(colorSettings[setting].help);
+  }
+
+  hbox.pack_start(settingLabel, true, true, 0);
+  hbox.add(colorButton);
+
+  return hbox;
+}
+
 /*
    Shell-extensions handlers
 */
@@ -62,6 +88,13 @@ function _createBoolSetting(setting) {
 function init() {
   Lib.initTranslations(Me);
   settings = Lib.getSettings(Me);
+
+  colorSettings = {
+    color: {
+      label: _("Alert color."),
+      help: _("The color used to paint the message on user's menu")
+    },
+  };
 
   boolSettings = {
     chatonly: {
@@ -81,6 +114,11 @@ function buildPrefsWidget() {
   let vbox = new Gtk.Box({orientation: Gtk.Orientation.VERTICAL,
                           margin: 20, margin_top: 10});
 
+  // Add all color settings
+  for (setting in colorSettings) {
+    let hbox = _createColorSetting(setting);
+    vbox.add(hbox);
+  }
   // Add all bool settings
   for (setting in boolSettings) {
     let hbox = _createBoolSetting(setting);

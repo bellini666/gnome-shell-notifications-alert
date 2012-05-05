@@ -21,9 +21,14 @@
  */
 
 const Gettext = imports.gettext;
+const Gdk = imports.gi.Gdk;
 const Gio = imports.gi.Gio;
 
 const Config = imports.misc.config;
+
+/*
+   Extension utils
+ */
 
 function initTranslations(extension) {
   let domain = 'gnome-shell-notifications-alert';
@@ -64,4 +69,47 @@ function getSettings(extension) {
                     extension.metadata.uuid + '. Please check your installation.');
 
   return new Gio.Settings({ settings_schema: schemaObj });
+}
+
+/*
+   Color utils
+ */
+
+function _scaleRound(value) {
+  // Based on gtk/gtkcoloreditor.c
+  value = Math.floor((value / 255) + 0.5);
+  value = Math.max(value, 0);
+  value = Math.min(value, 255);
+  return value;
+}
+
+function _dec2Hex(value) {
+  value = value.toString(16);
+
+  while (value.length < 2) {
+    value = '0' + value;
+  }
+
+  return value;
+}
+
+function getColorByHexadecimal(hex) {
+  let colorArray = Gdk.Color.parse(hex);
+  let color = null;
+
+  if (colorArray[0]) {
+    color = colorArray[1];
+  } else {
+    // On any error, default to red
+    color = new Gdk.Color({red: 65535});
+  }
+
+  return color;
+}
+
+function getHexadecimalByColor(color) {
+  let red = _scaleRound(color.red);
+  let green = _scaleRound(color.green);
+  let blue = _scaleRound(color.blue);
+  return "#" + _dec2Hex(red) + _dec2Hex(green) + _dec2Hex(blue)
 }
