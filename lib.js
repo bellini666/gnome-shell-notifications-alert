@@ -31,6 +31,7 @@ const Config = imports.misc.config;
  */
 
 function initTranslations(extension) {
+  // FIXME: Add real translations support.
   let domain = 'gnome-shell-notifications-alert';
 
   // check if this extension was built with "make zip-file", and thus

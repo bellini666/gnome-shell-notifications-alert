@@ -91,18 +91,18 @@ function init() {
 
   colorSettings = {
     color: {
-      label: _("Alert color."),
+      label: _("Alert color"),
       help: _("The color used to paint the message on user's menu")
     },
   };
 
   boolSettings = {
     chatonly: {
-      label: _("Only alert for chat notifications."),
+      label: _("Only alert for chat notifications"),
       help: _("Only chat notifications (like Empathy ones) will get alerted (default: OFF)")
     },
     force: {
-      label: _("Force alerting even when notifications are set to OFF."),
+      label: _("Force alerting even when notifications are set to OFF"),
       help: _("Alert even if you set notifications to OFF on user menu (default: OFF)")
     },
   };
