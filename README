@@ -1,11 +1,13 @@
 Gnome-Shell Notifications Alert by Thiago Bellini <hackedbellini@gmail.com>
 
 Description:
-  * Whenever there is an unread notification (i.e. IM Messages), paints red the
-    message in the user's menu.
+  * Whenever there is an unread notification (e.g. chat messages), paints the
+    message in the user's menu with a color chosen by the user.
 
 How to use:
   * Simply go to the extension page on gnome.extensions and activate it:
     https://extensions.gnome.org/extension/258/notifications-alert-on-user-menu/
+  * Any doughs, be sure to take a look at the FAQ:
+    https://github.com/hackedbellini/Gnome-Shell-Notifications-Alert/wiki/FAQ
 
 Want to improve this extension? Fork it and send me a pull request ;D
