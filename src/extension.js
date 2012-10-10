@@ -23,6 +23,7 @@
  */
 
 const Lang = imports.lang;
+const Mainloop = imports.mainloop;
 const Main = imports.ui.main;
 const MessageTray = imports.ui.messageTray;
 
@@ -116,9 +117,30 @@ function _MessageStyleHandler() {
     return false;
   }
 
+  this._loopStyle = function(toggle) {
+    // :TODO: make loopDelay a setting
+    let loopDelay = 1000; // ms
+    let userMenu = Main.panel._statusArea.userMenu;
+
+    if (!this._hasStyleAdded) {
+      // notifications may have been cleared since loop timer was added
+      return;
+    }
+    let style = toggle ? 
+      ("color: " + settings.get_string(SETTING_COLOR)) : 
+      this._oldStyle;
+
+    userMenu._iconBox.set_style(style);
+
+    // loop it
+    if (0 < loopDelay) {
+      let that = this;
+      Mainloop.timeout_add(loopDelay, function() { that._loopStyle(!toggle) });
+    }  
+  }
+
   this._addMessageStyle = function() {
     let userMenu = Main.panel._statusArea.userMenu;
-    let color = settings.get_string(SETTING_COLOR);
 
     if (!this._hasStyleAdded) {
       // Only cache oldStyle when when adding style the first time.
@@ -127,7 +149,7 @@ function _MessageStyleHandler() {
       this._oldStyle = userMenu._iconBox.get_style();
     }
 
-    userMenu._iconBox.set_style("color: " + color);
+    this._loopStyle(true);
     this._hasStyleAdded = true;
   }
 
