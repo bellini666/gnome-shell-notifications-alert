@@ -126,17 +126,19 @@ function _MessageStyleHandler() {
       // notifications may have been cleared since loop timer was added
       return;
     }
-    let style = toggle ? 
-      ("color: " + settings.get_string(SETTING_COLOR)) : 
+    let style = toggle ?
+      "color: " + settings.get_string(SETTING_COLOR) :
       this._oldStyle;
 
     userMenu._iconBox.set_style(style);
 
     // loop it
-    if (0 < loopDelay) {
+    if (loopDelay > 0) {
+      // For some reason, trying to use this directly above
+      // will result in "this._loopStyle is not a function" error
       let that = this;
       Mainloop.timeout_add(loopDelay, function() { that._loopStyle(!toggle) });
-    }  
+    }
   }
 
   this._addMessageStyle = function() {
