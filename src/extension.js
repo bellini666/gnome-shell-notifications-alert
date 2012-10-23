@@ -40,6 +40,7 @@ let originalPushNotification, originalSetCount, originalDestroy;
 
 function _MessageStyleHandler() {
 
+  this._loopTimeoutId = null
   this._oldStyle = null;
   this._hasStyleAdded = false;
 
@@ -137,7 +138,10 @@ function _MessageStyleHandler() {
       // For some reason, trying to use this directly above
       // will result in "this._loopStyle is not a function" error
       let that = this;
-      Mainloop.timeout_add(loopDelay, function() { that._loopStyle(!toggle) });
+      this._loopTimeoutId = Mainloop.timeout_add(
+        loopDelay, function() {
+          that._loopStyle(!toggle)
+        });
     }
   }
 
@@ -160,8 +164,12 @@ function _MessageStyleHandler() {
       return;
     }
 
-    let userMenu = Main.panel._statusArea.userMenu;
+    if (this._loopTimeoutId != null) {
+      // Prevent a possible race condition
+      Mainloop.source_remove(this._loopTimeoutId);
+    }
 
+    let userMenu = Main.panel._statusArea.userMenu;
     userMenu._iconBox.style = this._oldStyle;
     this._oldStyle = null;
     this._hasStyleAdded = false;
