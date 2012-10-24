@@ -11,6 +11,11 @@
       <summary>Only alert for chat notifications</summary>
       <description>Only chat notifications (like Empathy ones) will get alerted</description>
     </key>
+    <key name="blinkrate" type="i">
+      <default>800</default>
+      <summary>Blink rate</summary>
+      <description>The rate that the alert blinks, in ms. 0 means no blink</description>
+    </key>
     <key name="color" type="s">
       <default>'#ff0000'</default>
       <summary>Alert color</summary>

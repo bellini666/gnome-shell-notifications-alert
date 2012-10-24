@@ -31,6 +31,7 @@ const ExtensionUtils = imports.misc.extensionUtils;
 const Me = ExtensionUtils.getCurrentExtension();
 const Lib = Me.imports.lib;
 
+const SETTING_BLINK_RATE = 'blinkrate';
 const SETTING_COLOR = 'color';
 const SETTING_CHAT_ONLY = 'chatonly';
 const SETTING_FORCE = 'force';
@@ -40,7 +41,7 @@ let originalPushNotification, originalSetCount, originalDestroy;
 
 function _MessageStyleHandler() {
 
-  this._loopTimeoutId = null
+  this._loopTimeoutId = null;
   this._oldStyle = null;
   this._hasStyleAdded = false;
 
@@ -60,6 +61,8 @@ function _MessageStyleHandler() {
     settings.connect("changed::" + SETTING_CHAT_ONLY,
                      Lang.bind(this, this._onSettingsChanged));
     settings.connect("changed::" + SETTING_FORCE,
+                     Lang.bind(this, this._onSettingsChanged));
+    settings.connect("changed::" + SETTING_BLINK_RATE,
                      Lang.bind(this, this._onSettingsChanged));
 
     // Check for existing message counters when extension were
@@ -119,8 +122,6 @@ function _MessageStyleHandler() {
   }
 
   this._loopStyle = function(toggle) {
-    // :TODO: make loopDelay a setting
-    let loopDelay = 1000; // ms
     let userMenu = Main.panel._statusArea.userMenu;
 
     if (!this._hasStyleAdded) {
@@ -134,6 +135,7 @@ function _MessageStyleHandler() {
     userMenu._iconBox.set_style(style);
 
     // loop it
+    let loopDelay = settings.get_int(SETTING_BLINK_RATE);
     if (loopDelay > 0) {
       // For some reason, trying to use this directly above
       // will result in "this._loopStyle is not a function" error
