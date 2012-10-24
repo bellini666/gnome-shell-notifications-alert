@@ -125,7 +125,7 @@ function init() {
 
   intSettings = {
     blinkrate: {
-      label: _("Blink rate"),
+      label: _("Blink rate (in ms)"),
       help: _("The rate that the alert blinks, in ms. 0 means no blink (default: 800)"),
       min: 0,
       max: 10000,
