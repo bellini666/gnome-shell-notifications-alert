@@ -126,7 +126,7 @@ function _MessageStyleHandler() {
   }
 
   this._loopStyle = function(toggle) {
-    let userMenu = Main.panel._statusArea.userMenu;
+    let userMenu = Main.panel.statusArea.userMenu;
     let loopDelay = settings.get_int(SETTING_BLINK_RATE);
     let willLoop = loopDelay > 0;
 
