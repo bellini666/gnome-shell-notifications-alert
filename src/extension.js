@@ -127,20 +127,25 @@ function _MessageStyleHandler() {
 
   this._loopStyle = function(toggle) {
     let userMenu = Main.panel._statusArea.userMenu;
+    let loopDelay = settings.get_int(SETTING_BLINK_RATE);
+    let willLoop = loopDelay > 0;
 
     if (!this._hasStyleAdded) {
       // notifications may have been cleared since loop timer was added
       return;
     }
-    let style = toggle ?
-      "color: " + settings.get_string(SETTING_COLOR) :
-      this._oldStyle;
 
+    let style = willLoop && toggle ?
+      this._oldStyle :
+      "color: " + settings.get_string(SETTING_COLOR);
     userMenu._iconBox.set_style(style);
 
     // loop it
-    let loopDelay = settings.get_int(SETTING_BLINK_RATE);
     if (loopDelay > 0) {
+      if (this._loopTimeoutId != null) {
+        // Prevent more than one loop being executed
+        Mainloop.source_remove(this._loopTimeoutId);
+      }
       // For some reason, trying to use this directly above
       // will result in "this._loopStyle is not a function" error
       let that = this;
@@ -158,10 +163,16 @@ function _MessageStyleHandler() {
       // Only cache oldStyle when when adding style the first time.
       // Do this to support change the notification color as soon the
       // setting changes.
-      this._oldStyle = userMenu._iconBox.get_style();
+      let oldStyle = userMenu._iconBox.get_style();
+      if (oldStyle != settings.get_string(SETTING_COLOR)) {
+        // Changing SETTING_BLINK_RATE from something to 0 can produce
+        // a race condition where the loop stops when the style is the
+        // one we we added. Prevent it for overwriting this._oldStyle
+        this._oldStyle = oldStyle;
+      }
     }
 
-    this._loopStyle(true);
+    this._loopStyle(false);
     this._hasStyleAdded = true;
   }
 
