@@ -168,8 +168,8 @@ function _MessageStyleHandler() {
       }
     }
 
-    this._loopStyle(false);
     this._hasStyleAdded = true;
+    this._loopStyle(false);
   }
 
   this._removeMessageStyle = function() {
