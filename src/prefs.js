@@ -32,6 +32,7 @@ const Lib = Me.imports.lib;
 
 let settings;
 let boolSettings;
+let intSettings;
 let colorSettings;
 
 function _createBoolSetting(setting) {
@@ -52,6 +53,32 @@ function _createBoolSetting(setting) {
 
   hbox.pack_start(settingLabel, true, true, 0);
   hbox.add(settingSwitch);
+
+  return hbox;
+}
+
+function _createIntSetting(setting) {
+  let hbox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL});
+
+  let settingLabel = new Gtk.Label({label: intSettings[setting].label,
+                                    xalign: 0});
+
+  let spinButton = new Gtk.SpinButton.new_with_range(
+    intSettings[setting].min,
+    intSettings[setting].max,
+    intSettings[setting].step)
+  spinButton.set_value(settings.get_int(setting));
+  spinButton.connect('notify::value', function(spin) {
+    settings.set_int(setting, spin.get_value_as_int());
+  });
+
+  if (intSettings[setting].help) {
+    settingLabel.set_tooltip_text(intSettings[setting].help);
+    spinButton.set_tooltip_text(intSettings[setting].help);
+  }
+
+  hbox.pack_start(settingLabel, true, true, 0);
+  hbox.add(spinButton);
 
   return hbox;
 }
@@ -96,6 +123,16 @@ function init() {
     },
   };
 
+  intSettings = {
+    blinkrate: {
+      label: _("Blink rate"),
+      help: _("The rate that the alert blinks, in ms. 0 means no blink (default: 800)"),
+      min: 0,
+      max: 10000,
+      step: 1
+    },
+  };
+
   boolSettings = {
     chatonly: {
       label: _("Only alert for chat notifications"),
@@ -122,6 +159,11 @@ function buildPrefsWidget() {
   // Add all bool settings
   for (setting in boolSettings) {
     let hbox = _createBoolSetting(setting);
+    vbox.add(hbox);
+  }
+  // Add all int settings
+  for (setting in intSettings) {
+    let hbox = _createIntSetting(setting);
     vbox.add(hbox);
   }
 
