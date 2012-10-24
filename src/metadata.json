@@ -1,6 +1,6 @@
 {
   "shell-version": [
-    "3.6"
+    "3.6", "3.6.1"
   ],
   "uuid": "notifications-alert-on-user-menu@hackedbellini.gmail.com",
   "name": "Notifications Alert",
