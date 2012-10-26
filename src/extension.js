@@ -177,10 +177,6 @@ function _MessageStyleHandler() {
   }
 
   this._removeMessageStyle = function() {
-    if (!this._hasStyleAdded) {
-      return;
-    }
-
     if (this._loopTimeoutId != null) {
       // Prevent a possible race condition
       Mainloop.source_remove(this._loopTimeoutId);
