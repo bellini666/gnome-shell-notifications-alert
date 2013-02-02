@@ -2,15 +2,25 @@ UUID=notifications-alert-on-user-menu@hackedbellini.gmail.com
 INSTALL_PATH=~/.local/share/gnome-shell/extensions/$(UUID)
 ZIP_PATH=$(UUID).zip
 SRC_PATH=src
-SCHEMAS_PATH=$(SRC_PATH)/schemas
+SCHEMAS_PATH=schemas
+LOCALE_PATH=locale
+LOCALES=
 
-zip-file:
+locale:
+	for i in $(LOCALES); do \
+		mkdir -p $(LOCALE_PATH)/$$i/LC_MESSAGES/ && \
+		msgfmt $(LOCALE_PATH)/$$i.po -o \
+		$(LOCALE_PATH)/$$i/LC_MESSAGES/$(UUID).mo; \
+	done
+
+zip-file: locale
 	glib-compile-schemas $(SCHEMAS_PATH) \
-		--targetdir=$(SCHEMAS_PATH)  \
-		--strict &&                  \
-	cd $(SRC_PATH) &&                    \
-	zip -r ../$(ZIP_PATH) . &&           \
-	cd ..
+		--targetdir=$(SCHEMAS_PATH) \
+		--strict && \
+	zip -r -u $(ZIP_PATH) $(LOCALE_PATH) && \
+	zip -r -u $(ZIP_PATH) $(SCHEMAS_PATH) && \
+	cd $(SRC_PATH) && \
+	zip -r -u ../$(ZIP_PATH) .
 
 install: zip-file
 	mkdir -p $(INSTALL_PATH) && \
@@ -20,6 +30,9 @@ uninstall:
 	rm $(INSTALL_PATH) -rf
 
 clean:
-	rm $(UUID).zip $(SCHEMAS_PATH)/gschemas.compiled
+	rm -f $(UUID).zip $(SCHEMAS_PATH)/gschemas.compiled
+	for i in $(LOCALES); do \
+		rm $(LOCALE_PATH)/$$i/ -rf; \
+	done
 
-.PHONY: zip-file
+.PHONY: locale zip-file
