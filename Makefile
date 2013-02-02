@@ -4,7 +4,7 @@ ZIP_PATH=$(UUID).zip
 SRC_PATH=src
 SCHEMAS_PATH=schemas
 LOCALE_PATH=locale
-LOCALES=
+LOCALES=pt_BR
 
 locale:
 	for i in $(LOCALES); do \
