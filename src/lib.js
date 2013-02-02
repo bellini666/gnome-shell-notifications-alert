@@ -31,8 +31,8 @@ const Config = imports.misc.config;
  */
 
 function initTranslations(extension) {
-  // FIXME: Add real translations support.
-  let domain = 'gnome-shell-notifications-alert';
+  // This is the same as UUID from metadata.json
+  let domain = 'notifications-alert-on-user-menu@hackedbellini.gmail.com';
 
   // check if this extension was built with "make zip-file", and thus
   // has the locale files in a subfolder
