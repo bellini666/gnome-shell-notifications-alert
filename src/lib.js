@@ -32,7 +32,7 @@ const Config = imports.misc.config;
 
 function initTranslations(extension) {
   // This is the same as UUID from metadata.json
-  let domain = 'notifications-alert-on-user-menu@hackedbellini.gmail.com';
+  let domain = 'gnome-shell-notifications-alert';
 
   // check if this extension was built with "make zip-file", and thus
   // has the locale files in a subfolder
