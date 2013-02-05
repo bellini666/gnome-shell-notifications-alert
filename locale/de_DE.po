@@ -1,0 +1,52 @@
+# German translations for gnome-shell-notifications-alert package.
+# Copyright (C) 2013 Jonatan Zeidler
+# This file is distributed under the same license as the gnome-shell-notifications-alert package.
+# Jonatan Zeidler <jonatan_zeidler@gmx.de>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-shell-notifications-alert\n"
+"Report-Msgid-Bugs-To: jonatan_zeidler@gmx.de\n"
+"POT-Creation-Date: 2013-02-02 16:54-0200\n"
+"PO-Revision-Date: 2013-02-03 23:57+0100\n"
+"Last-Translator: Jonatan Zeidler <jonatan_zeidler@gmx.de>\n"
+"Language-Team: German <jonatan_zeidler@gmx.de>\n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
+
+#: src/prefs.js:121
+msgid "Alert color"
+msgstr "Benachrichtigungsfarbe"
+
+#: src/prefs.js:122
+msgid "The color used to paint the message on user's menu"
+msgstr "Farbe, in der die Benachrichtigung im Nutzermenü erscheint."
+
+#: src/prefs.js:128
+msgid "Blink rate (in ms)"
+msgstr "Blinkrate (in ms)"
+
+#: src/prefs.js:129
+msgid "The rate that the alert blinks, in ms. 0 means no blink (default: 800)"
+msgstr "Dauer eines Blinkens in ms. 0 bedeutet kein Blinken (Vorgabe: 800)"
+
+#: src/prefs.js:138
+msgid "Only alert for chat notifications"
+msgstr "Nur bei Chat-Benachrichtigungen aktivieren"
+
+#: src/prefs.js:139
+msgid "Only chat notifications (like Empathy ones) will get alerted (default: OFF)"
+msgstr "Benachrichtigt nur bei Chat-Meldungen (z.B. von Empathy) (Vorgabe: AUS)"
+
+#: src/prefs.js:142
+msgid "Force alerting even when notifications are set to OFF"
+msgstr "Benachrichtigt auch wenn Benachrichtigungen allgemein ausgeschaltet sind"
+
+#: src/prefs.js:143
+msgid "Alert even if you set notifications to OFF on user menu (default: OFF)"
+msgstr "Auch benachrichtigen, wenn Benachrichtigungen im Nutzermenü ausgeschaltet sind (Vorgabe: AUS)"
