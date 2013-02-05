@@ -1,2 +1,3 @@
+*.mo
 notifications-alert-on-user-menu@hackedbellini.gmail.com.zip
-src/schemas/gschemas.compiled
+schemas/gschemas.compiled
