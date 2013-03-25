@@ -109,10 +109,6 @@ function _MessageStyleHandler() {
   */
 
   this._hasNotifications = function(source) {
-    // FIXME: We should be using source.unseenCount > 0 here
-    // but something is wrong on notifications system. Rhythmbox's only
-    // notifications is always not acknowledged and that was producing
-    // false positives. Relying on countVisible for now is the best way to go
     if (source.countVisible) {
       return true;
     }
