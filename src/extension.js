@@ -76,7 +76,7 @@ function _MessageStyleHandler() {
   }
 
   this.updateMessageStyle = function() {
-    let sources = Main.messageTray.getSources()
+    let sources = Main.messageTray.getSources();
 
     if (settings.get_boolean(SETTING_FORCE) ||
         this._notificationsSwitch.state) {
