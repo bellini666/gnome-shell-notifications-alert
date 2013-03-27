@@ -76,14 +76,14 @@ function _MessageStyleHandler() {
   }
 
   this.updateMessageStyle = function() {
-    let items = Main.messageTray.getSummaryItems();
+    let sources = Main.messageTray.getSources()
 
     if (settings.get_boolean(SETTING_FORCE) ||
         this._notificationsSwitch.state) {
       let chatOnly = settings.get_boolean(SETTING_CHAT_ONLY);
 
-      for (let i = 0; i < items.length; i++) {
-        let source = items[i].source;
+      for (let i = 0; i < sources.length; i++) {
+        let source = sources[i];
 
         if (chatOnly && !source.isChat) {
           // The user choose to only be alerted by real chat notifications
@@ -109,16 +109,9 @@ function _MessageStyleHandler() {
   */
 
   this._hasNotifications = function(source) {
-    if (source.countVisible) {
-      return true;
-    }
-    for (let n = 0; n < source.notifications.length; n++) {
-      if (!source.notifications[n].resident) {
-        // Do not alert resident notifications (like Rhythmbox ones)
-        return true;
-      }
-    }
-    return false;
+    // indicatorCount returns the total notifications that are not
+    // transient neither resident. That's exactly what we want here.
+    return source.indicatorCount > 0;
   }
 
   this._loopStyle = function(toggle) {
@@ -134,7 +127,7 @@ function _MessageStyleHandler() {
     let style = willLoop && toggle ?
       this._oldStyle :
       "color: " + settings.get_string(SETTING_COLOR);
-    userMenu._iconBox.set_style(style);
+    userMenu._iconBox.style = style;
 
     // loop it
     if (loopDelay > 0) {
