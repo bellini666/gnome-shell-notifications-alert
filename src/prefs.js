@@ -63,7 +63,7 @@ function _createIntSetting(setting) {
   let settingLabel = new Gtk.Label({label: intSettings[setting].label,
                                     xalign: 0});
 
-  let spinButton = new Gtk.SpinButton.new_with_range(
+  let spinButton = Gtk.SpinButton.new_with_range(
     intSettings[setting].min,
     intSettings[setting].max,
     intSettings[setting].step)
