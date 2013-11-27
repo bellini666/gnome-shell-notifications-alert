@@ -26,6 +26,7 @@ const Lang = imports.lang;
 const Mainloop = imports.mainloop;
 const Main = imports.ui.main;
 const MessageTray = imports.ui.messageTray;
+const GnomeSession = imports.misc.gnomeSession;
 
 const ExtensionUtils = imports.misc.extensionUtils;
 const Me = ExtensionUtils.getCurrentExtension();
@@ -44,15 +45,24 @@ function _MessageStyleHandler() {
   this._loopTimeoutId = null;
   this._oldStyle = null;
   this._hasStyleAdded = false;
+  this._presence = new GnomeSession.Presence(
+    Lang.bind(this, function(proxy, error) {
+      if (error) {
+        logError(error, 'Error while reading gnome-session presence');
+        return;
+      }
+  }));
 
   /*
      Public API
   */
 
   this.enable = function() {
-    this._notificationsSwitch = Main.panel.statusArea.userMenu._notificationsSwitch;
-    this._notificationsSwitchToggledSignal = this._notificationsSwitch.connect(
-        'toggled', Lang.bind(this, this._onNotificationsSwitchToggled));
+    this._presence.connectSignal(
+      'StatusChanged', Lang.bind(this, function(proxy, senderName, [status]) {
+        this._presence.status = status;
+        this._onNotificationsSwitchToggled();
+    }));
 
     // Connect settings change events, so we can update message style
     // as soon as the user makes the change
@@ -71,15 +81,15 @@ function _MessageStyleHandler() {
   }
 
   this.disable = function() {
-    this._notificationsSwitch.disconnect(this._notificationsSwitchToggledSignal);
     this._removeMessageStyle();
   }
 
   this.updateMessageStyle = function() {
+    this.notificationStatus =
+      (this._presence.status != GnomeSession.PresenceStatus.BUSY);
     let sources = Main.messageTray.getSources();
 
-    if (settings.get_boolean(SETTING_FORCE) ||
-        this._notificationsSwitch.state) {
+    if (settings.get_boolean(SETTING_FORCE) || this.notificationStatus) {
       let chatOnly = settings.get_boolean(SETTING_CHAT_ONLY);
 
       for (let i = 0; i < sources.length; i++) {
@@ -115,7 +125,7 @@ function _MessageStyleHandler() {
   }
 
   this._loopStyle = function(toggle) {
-    let userMenu = Main.panel.statusArea.userMenu;
+    let userMenu = Main.panel.statusArea.aggregateMenu;
     let loopDelay = settings.get_int(SETTING_BLINK_RATE);
     let willLoop = loopDelay > 0;
 
@@ -127,7 +137,7 @@ function _MessageStyleHandler() {
     let style = willLoop && toggle ?
       this._oldStyle :
       "color: " + settings.get_string(SETTING_COLOR);
-    userMenu._iconBox.style = style;
+    userMenu._indicators.style = style;
 
     // loop it
     if (loopDelay > 0) {
@@ -146,13 +156,13 @@ function _MessageStyleHandler() {
   }
 
   this._addMessageStyle = function() {
-    let userMenu = Main.panel.statusArea.userMenu;
+    let userMenu = Main.panel.statusArea.aggregateMenu;
 
     if (!this._hasStyleAdded) {
       // Only cache oldStyle when when adding style the first time.
       // Do this to support change the notification color as soon the
       // setting changes.
-      let oldStyle = userMenu._iconBox.get_style();
+      let oldStyle = userMenu._indicators.get_style();
       if (oldStyle != settings.get_string(SETTING_COLOR)) {
         // Changing SETTING_BLINK_RATE from something to 0 can produce
         // a race condition where the loop stops when the style is the
@@ -171,8 +181,8 @@ function _MessageStyleHandler() {
       Mainloop.source_remove(this._loopTimeoutId);
     }
 
-    let userMenu = Main.panel.statusArea.userMenu;
-    userMenu._iconBox.style = this._oldStyle;
+    let userMenu = Main.panel.statusArea.aggregateMenu;
+    userMenu._indicators.style = this._oldStyle;
     this._oldStyle = null;
     this._hasStyleAdded = false;
   }
