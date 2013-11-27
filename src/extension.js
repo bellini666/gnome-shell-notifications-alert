@@ -45,8 +45,8 @@ function _MessageStyleHandler() {
   this._loopTimeoutId = null;
   this._oldStyle = null;
   this._hasStyleAdded = false;
-  this._presence = new GnomeSession.Presence(Lang.bind
-                                            (this, function(proxy, error) {
+  this._presence = new GnomeSession.Presence(
+    Lang.bind(this, function(proxy, error) {
       if (error) {
         logError(error, 'Error while reading gnome-session presence');
         return;
@@ -58,10 +58,10 @@ function _MessageStyleHandler() {
   */
 
   this.enable = function() {
-    this._presence.connectSignal('StatusChanged',
-                        Lang.bind(this, function(proxy, senderName, [status]) {
-      this._presence.status = status;
-      this._onNotificationsSwitchToggled();
+    this._presence.connectSignal(
+      'StatusChanged', Lang.bind(this, function(proxy, senderName, [status]) {
+        this._presence.status = status;
+        this._onNotificationsSwitchToggled();
     }));
 
     // Connect settings change events, so we can update message style
@@ -86,11 +86,10 @@ function _MessageStyleHandler() {
 
   this.updateMessageStyle = function() {
     this.notificationStatus =
-              (this._presence.status != GnomeSession.PresenceStatus.BUSY);
+      (this._presence.status != GnomeSession.PresenceStatus.BUSY);
     let sources = Main.messageTray.getSources();
 
-    if (settings.get_boolean(SETTING_FORCE) ||
-        this.notificationStatus) {
+    if (settings.get_boolean(SETTING_FORCE) || this.notificationStatus) {
       let chatOnly = settings.get_boolean(SETTING_CHAT_ONLY);
 
       for (let i = 0; i < sources.length; i++) {
