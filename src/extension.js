@@ -130,8 +130,9 @@ function _MessageStyleHandler() {
     let willLoop = loopDelay > 0;
 
     if (!this._hasStyleAdded) {
-      // notifications may have been cleared since loop timer was added
-      return;
+      // Notifications may have been cleared since loop timer was added,
+      // return false to stop the timeout. Just a precaution, should not happen
+      return false;
     }
 
     let style = willLoop && toggle ?
@@ -139,20 +140,18 @@ function _MessageStyleHandler() {
       "color: " + settings.get_string(SETTING_COLOR);
     userMenu._indicators.style = style;
 
-    // loop it
-    if (loopDelay > 0) {
-      if (this._loopTimeoutId != null) {
-        // Prevent more than one loop being executed
-        Mainloop.source_remove(this._loopTimeoutId);
-      }
+    // loop it, but only if we are not already looping
+    if (willLoop && self._loopTimeoutId == null) {
       // For some reason, trying to use this directly above
       // will result in "this._loopStyle is not a function" error
       let that = this;
       this._loopTimeoutId = Mainloop.timeout_add(
         loopDelay, function() {
-          that._loopStyle(!toggle)
+          return that._loopStyle(!toggle);
         });
     }
+    // keep looping
+    return true;
   }
 
   this._addMessageStyle = function() {
@@ -177,8 +176,9 @@ function _MessageStyleHandler() {
 
   this._removeMessageStyle = function() {
     if (this._loopTimeoutId != null) {
-      // Prevent a possible race condition
+      // Stop the looping
       Mainloop.source_remove(this._loopTimeoutId);
+      self._loopTimeoutId = null;
     }
 
     let userMenu = Main.panel.statusArea.aggregateMenu;
