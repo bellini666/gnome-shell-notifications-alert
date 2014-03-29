@@ -124,57 +124,49 @@ function _MessageStyleHandler() {
     return source.indicatorCount > 0;
   }
 
-  this._loopStyle = function(toggle) {
-    let userMenu = Main.panel.statusArea.aggregateMenu;
-    let loopDelay = settings.get_int(SETTING_BLINK_RATE);
-    let willLoop = loopDelay > 0;
-
+  this._toggleStyle = function() {
     if (!this._hasStyleAdded) {
       // Notifications may have been cleared since loop timer was added,
       // return false to stop the timeout. Just a precaution, should not happen
       return false;
     }
 
-    let style = willLoop && toggle ?
-      this._oldStyle :
-      "color: " + settings.get_string(SETTING_COLOR);
-    userMenu._indicators.style = style;
+    let userMenu = Main.panel.statusArea.aggregateMenu;
+    let actualStyle = userMenu._indicators.style;
+    let userStyle = "color: " + settings.get_string(SETTING_COLOR);
 
-    // loop it, but only if we are not already looping
-    if (willLoop && this._loopTimeoutId == null) {
-      // For some reason, trying to use this directly above
-      // will result in "this._loopStyle is not a function" error
-      let that = this;
-      this._loopTimeoutId = Mainloop.timeout_add(
-        loopDelay, function() {
-          return that._loopStyle(!toggle);
-        });
-    }
+    userMenu._indicators.style = (actualStyle == this._oldStyle) ?
+      userStyle : this._oldStyle;
+
     // keep looping
     return true;
   }
 
   this._addMessageStyle = function() {
-    let userMenu = Main.panel.statusArea.aggregateMenu;
-
-    if (!this._hasStyleAdded) {
-      // Only cache oldStyle when when adding style the first time.
-      // Do this to support change the notification color as soon the
-      // setting changes.
-      let oldStyle = userMenu._indicators.get_style();
-      if (oldStyle != settings.get_string(SETTING_COLOR)) {
-        // Changing SETTING_BLINK_RATE from something to 0 can produce
-        // a race condition where the loop stops when the style is the
-        // one we we added. Prevent it for overwriting this._oldStyle
-        this._oldStyle = oldStyle;
-      }
+    if (this._hasStyleAdded) {
+      this._removeMessageStyle();
     }
 
+    let userMenu = Main.panel.statusArea.aggregateMenu;
+    let loopDelay = settings.get_int(SETTING_BLINK_RATE);
+
+    this._oldStyle = userMenu._indicators.get_style();
     this._hasStyleAdded = true;
-    this._loopStyle(false);
+
+    if (loopDelay > 0) {
+      this._loopTimeoutId = Mainloop.timeout_add(
+          loopDelay, Lang.bind(this, this._toggleStyle))
+    } else {
+      this._toggleStyle();
+    }
   }
 
   this._removeMessageStyle = function() {
+    if (!this._hasStyleAdded) {
+      return;
+    }
+
+    this._hasStyleAdded = false;
     if (this._loopTimeoutId != null) {
       // Stop the looping
       Mainloop.source_remove(this._loopTimeoutId);
@@ -184,7 +176,6 @@ function _MessageStyleHandler() {
     let userMenu = Main.panel.statusArea.aggregateMenu;
     userMenu._indicators.style = this._oldStyle;
     this._oldStyle = null;
-    this._hasStyleAdded = false;
   }
 
   /*
