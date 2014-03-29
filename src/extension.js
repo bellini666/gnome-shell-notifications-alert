@@ -141,7 +141,7 @@ function _MessageStyleHandler() {
     userMenu._indicators.style = style;
 
     // loop it, but only if we are not already looping
-    if (willLoop && self._loopTimeoutId == null) {
+    if (willLoop && this._loopTimeoutId == null) {
       // For some reason, trying to use this directly above
       // will result in "this._loopStyle is not a function" error
       let that = this;
@@ -178,7 +178,7 @@ function _MessageStyleHandler() {
     if (this._loopTimeoutId != null) {
       // Stop the looping
       Mainloop.source_remove(this._loopTimeoutId);
-      self._loopTimeoutId = null;
+      this._loopTimeoutId = null;
     }
 
     let userMenu = Main.panel.statusArea.aggregateMenu;
