@@ -42,23 +42,28 @@ let originalCountUpdated, originalDestroy;
 
 function _MessageStyleHandler() {
 
-  this._loopTimeoutId = null;
-  this._oldStyle = null;
-  this._hasStyleAdded = false;
-  this._presence = new GnomeSession.Presence(
-    Lang.bind(this, function(proxy, error) {
-      if (error) {
-        logError(error, 'Error while reading gnome-session presence');
-        return;
-      }
-  }));
-
   /*
      Public API
   */
 
+  this.init = function() {
+    this._signals = {};
+    this._statusChangedId = null;
+    this._loopTimeoutId = null;
+    this._oldStyle = null;
+    this._hasStyleAdded = false;
+
+    this._presence = new GnomeSession.Presence(
+      Lang.bind(this, function(proxy, error) {
+        if (error) {
+          logError(error, 'Error while reading gnome-session presence');
+          return;
+        }
+    }));
+  }
+
   this.enable = function() {
-    this._presence.connectSignal(
+    this._statusChangedId = this._presence.connectSignal(
       'StatusChanged', Lang.bind(this, function(proxy, senderName, [status]) {
         this._presence.status = status;
         this._onNotificationsSwitchToggled();
@@ -66,14 +71,10 @@ function _MessageStyleHandler() {
 
     // Connect settings change events, so we can update message style
     // as soon as the user makes the change
-    settings.connect("changed::" + SETTING_COLOR,
-                     Lang.bind(this, this._onSettingsChanged));
-    settings.connect("changed::" + SETTING_CHAT_ONLY,
-                     Lang.bind(this, this._onSettingsChanged));
-    settings.connect("changed::" + SETTING_FORCE,
-                     Lang.bind(this, this._onSettingsChanged));
-    settings.connect("changed::" + SETTING_BLINK_RATE,
-                     Lang.bind(this, this._onSettingsChanged));
+    this._connectSetting(SETTING_COLOR);
+    this._connectSetting(SETTING_CHAT_ONLY);
+    this._connectSetting(SETTING_FORCE);
+    this._connectSetting(SETTING_BLINK_RATE);
 
     // Check for existing message counters when extension were
     // loaded on an already running shell.
@@ -81,6 +82,12 @@ function _MessageStyleHandler() {
   }
 
   this.disable = function() {
+    this._presence.disconnectSignal(this._statusChangedId);
+    for (let key in this._signals) {
+      settings.disconnect(this._signals[key]);
+      delete this._signals[key];
+    }
+
     this._removeMessageStyle();
   }
 
@@ -117,6 +124,11 @@ function _MessageStyleHandler() {
   /*
      Private
   */
+
+  this._connectSetting = function(setting) {
+    this._signals[setting] = settings.connect(
+      "changed::" + setting, Lang.bind(this, this._onSettingsChanged));
+  }
 
   this._hasNotifications = function(source) {
     // indicatorCount returns the total notifications that are not
@@ -214,11 +226,12 @@ function _destroy() {
 function init() {
   Lib.initTranslations(Me);
   settings = Lib.getSettings(Me);
+
+  messageStyleHandler = new _MessageStyleHandler();
+  messageStyleHandler.init();
 }
 
 function enable() {
-  messageStyleHandler = new _MessageStyleHandler();
-
   originalCountUpdated = MessageTray.Source.prototype.countUpdated;
   originalDestroy = MessageTray.Source.prototype.destroy;
 
