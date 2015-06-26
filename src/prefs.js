@@ -149,7 +149,8 @@ function buildPrefsWidget() {
   let frame = new Gtk.Box({orientation: Gtk.Orientation.VERTICAL,
                            border_width: 10});
   let vbox = new Gtk.Box({orientation: Gtk.Orientation.VERTICAL,
-                          margin: 20, margin_top: 10});
+                          margin: 20, margin_top: 10, spacing: 5});
+  let setting;
 
   // Add all color settings
   for (setting in colorSettings) {
