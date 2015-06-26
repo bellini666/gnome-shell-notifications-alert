@@ -131,9 +131,15 @@ function _MessageStyleHandler() {
   }
 
   this._hasNotifications = function(source) {
-    // indicatorCount returns the total notifications that are not
-    // transient neither resident. That's exactly what we want here.
-    return source.indicatorCount > 0;
+    if (source.countVisible) {
+      return true;
+    }
+    for (let n = 0; n < source.notifications.length; n++) {
+      if (!source.notifications[n].resident) {
+        return true;
+      }
+    }
+    return false;
   }
 
   this._toggleStyle = function() {
@@ -143,11 +149,11 @@ function _MessageStyleHandler() {
       return false;
     }
 
-    let userMenu = Main.panel.statusArea.aggregateMenu;
-    let actualStyle = userMenu._indicators.style;
+    let dateMenu = Main.panel.statusArea.dateMenu;
+    let actualStyle = dateMenu.actor.style;
     let userStyle = "color: " + settings.get_string(SETTING_COLOR);
 
-    userMenu._indicators.style = (actualStyle == this._oldStyle) ?
+    dateMenu.actor.style = (actualStyle == this._oldStyle) ?
       userStyle : this._oldStyle;
 
     // keep looping
@@ -159,10 +165,10 @@ function _MessageStyleHandler() {
       this._removeMessageStyle();
     }
 
-    let userMenu = Main.panel.statusArea.aggregateMenu;
+    let dateMenu = Main.panel.statusArea.dateMenu;
     let loopDelay = settings.get_int(SETTING_BLINK_RATE);
 
-    this._oldStyle = userMenu._indicators.get_style();
+    this._oldStyle = dateMenu.actor.style;
     this._hasStyleAdded = true;
 
     if (loopDelay > 0) {
@@ -185,8 +191,8 @@ function _MessageStyleHandler() {
       this._loopTimeoutId = null;
     }
 
-    let userMenu = Main.panel.statusArea.aggregateMenu;
-    userMenu._indicators.style = this._oldStyle;
+    let dateMenu = Main.panel.statusArea.dateMenu;
+    dateMenu.actor.style = this._oldStyle;
     this._oldStyle = null;
   }
 
