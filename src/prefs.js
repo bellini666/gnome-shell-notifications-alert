@@ -20,6 +20,8 @@
  *
  */
 
+const GObject = imports.gi.GObject;
+const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
 const Lang = imports.lang;
 
@@ -29,6 +31,14 @@ const _ = Gettext.gettext;
 const ExtensionUtils = imports.misc.extensionUtils;
 const Me = ExtensionUtils.getCurrentExtension();
 const Lib = Me.imports.lib;
+
+const SETTING_BLACKLIST = 'application-list';
+
+const Columns = {
+  APPINFO: 0,
+  DISPLAY_NAME: 1,
+  ICON: 2,
+};
 
 let settings;
 let boolSettings;
@@ -108,6 +118,15 @@ function _createColorSetting(setting) {
   return hbox;
 }
 
+function _createBlacklistSetting() {
+  let settingLabel = new Gtk.Label({label: "Blacklist", xalign: 0});
+  let widget = new Widget();
+  let blbox = new Gtk.Grid({ column_spacing: 5, row_spacing: 5, margin: 10 });
+  blbox.attach(settingLabel,0,0,1,1);
+  blbox.attach(widget,0,1,1,1);
+  return blbox;
+}
+
 /*
    Shell-extensions handlers
 */
@@ -145,6 +164,173 @@ function init() {
   };
 }
 
+
+/*
+   Blacklist widget
+*/
+const Widget = new GObject.Class({
+  Name: 'NotificationsAlert.Prefs.BlackListWidget',
+  GTypeName: 'NotificationsAlertBlackListPrefsWidget',
+  Extends: Gtk.Grid,
+
+  _init: function(params) {
+    this.parent(params);
+    this.set_orientation(Gtk.Orientation.VERTICAL);
+
+    Lib.initTranslations(Me);
+    this._settings = Lib.getSettings(Me);
+
+    this._store = new Gtk.ListStore();
+    this._store.set_column_types([Gio.AppInfo, GObject.TYPE_STRING, Gio.Icon]);
+
+    let scrolled = new Gtk.ScrolledWindow({ shadow_type: Gtk.ShadowType.IN});
+    scrolled.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
+    scrolled.set_min_content_height(150);
+    this.add(scrolled);
+
+    this._treeView = new Gtk.TreeView({ model: this._store,
+                                        hexpand: true, vexpand: true });
+    this._treeView.get_selection().set_mode(Gtk.SelectionMode.SINGLE);
+
+    let appColumn = new Gtk.TreeViewColumn({ expand: true, sort_column_id: Columns.DISPLAY_NAME,
+                                             title: _("Application") });
+    let iconRenderer = new Gtk.CellRendererPixbuf;
+    appColumn.pack_start(iconRenderer, false);
+    appColumn.add_attribute(iconRenderer, "gicon", Columns.ICON);
+    let nameRenderer = new Gtk.CellRendererText;
+    appColumn.pack_start(nameRenderer, true);
+    appColumn.add_attribute(nameRenderer, "text", Columns.DISPLAY_NAME);
+    this._treeView.append_column(appColumn);
+
+    scrolled.add(this._treeView);
+
+    let toolbar = new Gtk.Toolbar({ icon_size: Gtk.IconSize.SMALL_TOOLBAR });
+    toolbar.get_style_context().add_class(Gtk.STYLE_CLASS_INLINE_TOOLBAR);
+    this.add(toolbar);
+
+    let newButton = new Gtk.ToolButton({ icon_name: 'bookmark-new-symbolic',
+                                         label: _("Add Rule"),
+                                         is_important: true });
+    newButton.connect('clicked', Lang.bind(this, this._createNew));
+    toolbar.add(newButton);
+
+    let delButton = new Gtk.ToolButton({ icon_name: 'edit-delete-symbolic'  });
+      delButton.connect('clicked', Lang.bind(this, this._deleteSelected));
+      toolbar.add(delButton);
+
+    this._changedPermitted = true;
+    this._refresh();
+  },
+
+  _createNew: function() {
+    let dialog = new Gtk.Dialog({ title: _("Select an application to blacklist"),
+                                  transient_for: this.get_toplevel(),
+                                  use_header_bar: true,
+                                  modal: true });
+    dialog.add_button(Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL);
+    let addButton = dialog.add_button(_("Add"), Gtk.ResponseType.OK);
+    dialog.set_default_response(Gtk.ResponseType.OK);
+
+    let grid = new Gtk.Grid({ column_spacing: 10,
+                              row_spacing: 15,
+                              margin: 10 });
+    dialog._appChooser = new Gtk.AppChooserWidget({ show_all: true });
+
+    let hbox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL});
+    hbox.pack_start(dialog._appChooser, true, true, 0);
+    dialog.get_content_area().pack_start(hbox, true, true, 0);
+
+    dialog.connect('response', Lang.bind(this, function(dialog, id) {
+      if (id != Gtk.ResponseType.OK) {
+        dialog.destroy();
+        return;
+      }
+
+      let appInfo = dialog._appChooser.get_app_info();
+      if (!appInfo) return;
+
+      if (this._checkId( appInfo.get_id())){
+        dialog.destroy();
+        return;
+      }
+
+      this._changedPermitted = false;
+      this._appendItem(appInfo.get_id());
+      this._changedPermitted = true;
+
+      let iter = this._store.append();
+
+      this._store.set(iter,
+        [Columns.APPINFO, Columns.ICON, Columns.DISPLAY_NAME],
+        [appInfo, appInfo.get_icon(), appInfo.get_display_name()]);
+
+      dialog.destroy();
+      }));
+
+    dialog.show_all();
+  },
+
+  _deleteSelected: function() {
+    let [any, model, iter] = this._treeView.get_selection().get_selected();
+
+    if (any) {
+      let appInfo = this._store.get_value(iter, Columns.APPINFO);
+
+      this._changedPermitted = false;
+      this._removeItem(appInfo.get_id());
+      this._changedPermitted = true;
+      this._store.remove(iter);
+    }
+  },
+
+  _refresh: function() {
+    if (!this._changedPermitted)
+        // Ignore this notification, model is being modified outside
+        return;
+
+    this._store.clear();
+
+    let currentItems = this._settings.get_strv(SETTING_BLACKLIST);
+    let validItems = [ ];
+    for (let i = 0; i < currentItems.length; i++) {
+      let id = currentItems[i];
+      let appInfo = Gio.DesktopAppInfo.new(id);
+      if (!appInfo)
+        continue;
+      validItems.push(currentItems[i]);
+
+      let iter = this._store.append();
+      this._store.set(iter,
+          [Columns.APPINFO, Columns.ICON, Columns.DISPLAY_NAME],
+          [appInfo, appInfo.get_icon(), appInfo.get_display_name()]);
+    }
+
+    if (validItems.length != currentItems.length) // some items were filtered out
+        this._settings.set_strv(SETTING_BLACKLIST, validItems);
+  },
+
+  _checkId: function(id) {
+    let items = this._settings.get_strv(SETTING_BLACKLIST);
+    return (items.indexOf(id) != -1);
+  },
+
+  _appendItem: function(id) {
+    let currentItems = this._settings.get_strv(SETTING_BLACKLIST);
+    currentItems.push(id);
+    this._settings.set_strv(SETTING_BLACKLIST, currentItems);
+  },
+
+  _removeItem: function(id) {
+    let currentItems = this._settings.get_strv(SETTING_BLACKLIST);
+    let index = currentItems.indexOf(id);
+
+    if (index < 0)
+      return;
+    currentItems.splice(index, 1);
+    this._settings.set_strv(SETTING_BLACKLIST, currentItems);
+  }
+});
+
 function buildPrefsWidget() {
   let frame = new Gtk.Box({orientation: Gtk.Orientation.VERTICAL,
                            border_width: 10});
@@ -167,6 +353,10 @@ function buildPrefsWidget() {
     let hbox = _createIntSetting(setting);
     vbox.add(hbox);
   }
+
+  // Add blacklist setting
+  let blbox = _createBlacklistSetting();
+  vbox.add(blbox);
 
   frame.add(vbox);
   frame.show_all();

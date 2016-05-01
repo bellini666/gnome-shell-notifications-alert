@@ -117,3 +117,15 @@ function getHexadecimalByColor(color) {
   let blue = _scaleRound(color.blue);
   return "#" + _dec2Hex(red) + _dec2Hex(green) + _dec2Hex(blue);
 }
+
+function getAppNamesFromAppInfos(list) {
+  let appNames = [ ];
+  for (let i = 0; i < list.length; i++) {
+    let id = list[i];
+    let appInfo = Gio.DesktopAppInfo.new(id);
+    if (!appInfo)
+      continue;
+    appNames.push(appInfo.get_name());
+  }
+  return appNames;
+}

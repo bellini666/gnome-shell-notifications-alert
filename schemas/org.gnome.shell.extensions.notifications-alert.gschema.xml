@@ -21,5 +21,10 @@
       <summary>Alert color</summary>
       <description>The color used to paint the message on user's menu</description>
     </key>
+    <key name="application-list" type="as">
+      <default>[ ]</default>
+      <summary>Blacklist</summary>
+      <description>A list of strings, each containing an application id (desktop file name), followed by a colon</description>
+    </key>
   </schema>
 </schemalist>
