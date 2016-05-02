@@ -36,6 +36,7 @@ const SETTING_BLINK_RATE = 'blinkrate';
 const SETTING_COLOR = 'color';
 const SETTING_CHAT_ONLY = 'chatonly';
 const SETTING_FORCE = 'force';
+const SETTING_BLACKLIST = 'application-list';
 
 let settings, messageStyleHandler;
 let originalCountUpdated, originalDestroy;
@@ -98,6 +99,8 @@ function _MessageStyleHandler() {
 
     if (settings.get_boolean(SETTING_FORCE) || this.notificationStatus) {
       let chatOnly = settings.get_boolean(SETTING_CHAT_ONLY);
+      let currentItems = settings.get_strv(SETTING_BLACKLIST);
+      currentItems = Lib.getAppNamesFromAppInfos(currentItems);
 
       for (let i = 0; i < sources.length; i++) {
         let source = sources[i];
@@ -108,6 +111,9 @@ function _MessageStyleHandler() {
         }
         if (source.isMuted) {
           // Do not alert for muted notifications
+          continue;
+        }
+        if(currentItems.indexOf(source.title) != -1) {
           continue;
         }
         if (this._hasNotifications(source)) {
