@@ -119,9 +119,9 @@ function _createColorSetting(setting) {
 }
 
 function _createBlacklistSetting() {
-  let settingLabel = new Gtk.Label({label: "Blacklist", xalign: 0});
+  let settingLabel = new Gtk.Label({label: _("Blacklist"), xalign: 0});
   let widget = new Widget();
-  let blbox = new Gtk.Grid({ column_spacing: 5, row_spacing: 5, margin: 10 });
+  let blbox = new Gtk.Grid({column_spacing: 5, row_spacing: 5, margin: 0});
   blbox.attach(settingLabel,0,0,1,1);
   blbox.attach(widget,0,1,1,1);
   return blbox;
@@ -223,7 +223,7 @@ const Widget = new GObject.Class({
   },
 
   _createNew: function() {
-    let dialog = new Gtk.Dialog({ title: _("Select an application to blacklist"),
+    let dialog = new Gtk.Dialog({ title: _("Blacklist app"),
                                   transient_for: this.get_toplevel(),
                                   use_header_bar: true,
                                   modal: true });
@@ -231,12 +231,13 @@ const Widget = new GObject.Class({
     let addButton = dialog.add_button(_("Add"), Gtk.ResponseType.OK);
     dialog.set_default_response(Gtk.ResponseType.OK);
 
-    let grid = new Gtk.Grid({ column_spacing: 10,
-                              row_spacing: 15,
-                              margin: 10 });
     dialog._appChooser = new Gtk.AppChooserWidget({ show_all: true });
 
-    let hbox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL});
+    let lbl = new Gtk.Label({label: _("Choose an application to blacklist:"),
+                             xalign: 0.5});
+    let hbox = new Gtk.Box({orientation: Gtk.Orientation.VERTICAL,
+                            margin: 5});
+    hbox.pack_start(lbl, false, true, 0);
     hbox.pack_start(dialog._appChooser, true, true, 0);
     dialog.get_content_area().pack_start(hbox, true, true, 0);
 
