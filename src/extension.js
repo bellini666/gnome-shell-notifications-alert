@@ -37,6 +37,7 @@ const SETTING_COLOR = 'color';
 const SETTING_CHAT_ONLY = 'chatonly';
 const SETTING_FORCE = 'force';
 const SETTING_BLACKLIST = 'application-list';
+const SETTING_FILTER_TYPE = 'filter';
 
 let settings, messageStyleHandler;
 let originalCountUpdated, originalDestroy;
@@ -99,6 +100,7 @@ function _MessageStyleHandler() {
 
     if (settings.get_boolean(SETTING_FORCE) || this.notificationStatus) {
       let chatOnly = settings.get_boolean(SETTING_CHAT_ONLY);
+      let filter = settings.get_int(SETTING_FILTER_TYPE);
       let currentItems = settings.get_strv(SETTING_BLACKLIST);
       currentItems = Lib.getAppNamesFromAppInfos(currentItems);
 
@@ -113,7 +115,12 @@ function _MessageStyleHandler() {
           // Do not alert for muted notifications
           continue;
         }
-        if(currentItems.indexOf(source.title) != -1) {
+        if((filter == 0) && (currentItems.indexOf(source.title) != -1)) {
+          // Blacklist
+          continue;
+        }
+        if((filter == 1) && (currentItems.indexOf(source.title) == -1)) {
+          // Whitelist
           continue;
         }
         if (this._hasNotifications(source)) {

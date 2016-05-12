@@ -33,6 +33,7 @@ const Me = ExtensionUtils.getCurrentExtension();
 const Lib = Me.imports.lib;
 
 const SETTING_BLACKLIST = 'application-list';
+const SETTING_FILTER_TYPE = 'filter';
 
 const Columns = {
   APPINFO: 0,
@@ -125,6 +126,38 @@ function _createBlacklistSetting() {
   blbox.attach(settingLabel,0,0,1,1);
   blbox.attach(widget,0,1,1,1);
   return blbox;
+}
+
+function _createFilterTypeSetting() {
+  let hbox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL});
+  let settingLabel = new Gtk.Label({label: _("Filter Type"), xalign: 0});
+
+  let listStore = new Gtk.ListStore();
+  listStore.set_column_types ([
+    GObject.TYPE_STRING,
+    GObject.TYPE_STRING]);
+
+  listStore.insert_with_valuesv (-1,  [0, 1], [0, "Blacklist"]);
+  listStore.insert_with_valuesv (-1,  [0, 1], [1, "Whitelist"]);
+
+  let filterComboBox = new Gtk.ComboBox({ model: listStore });
+  filterComboBox.set_active (settings.get_int(SETTING_FILTER_TYPE));
+  filterComboBox.set_id_column(0);
+
+  let rendererText = new Gtk.CellRendererText();
+  filterComboBox.pack_start (rendererText, false);
+  filterComboBox.add_attribute (rendererText, "text", 1);
+
+  filterComboBox.connect('changed', function(entry) {
+    let id = filterComboBox.get_active_id();
+    if (id == null)
+        return;
+    settings.set_int(SETTING_FILTER_TYPE, id);
+  });
+
+  hbox.pack_start(settingLabel, true, true, 0);
+  hbox.add(filterComboBox);
+  return hbox;
 }
 
 /*
@@ -355,7 +388,11 @@ function buildPrefsWidget() {
     vbox.add(hbox);
   }
 
-  // Add blacklist setting
+  // Add filter type setting
+  let filterType = _createFilterTypeSetting();
+  vbox.add(filterType);
+
+  // Add filter list
   let blbox = _createBlacklistSetting();
   vbox.add(blbox);
 

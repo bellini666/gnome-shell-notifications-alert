@@ -26,5 +26,10 @@
       <summary>Blacklist</summary>
       <description>A list of strings, each containing an application id (desktop file name), followed by a colon</description>
     </key>
+    <key name="filter" type="i">
+      <default>0</default>
+      <summary>Filter type</summary>
+      <description>Filter type to use. 0 mean Blacklist, 1 means Whitelist</description>
+    </key>
   </schema>
 </schemalist>
