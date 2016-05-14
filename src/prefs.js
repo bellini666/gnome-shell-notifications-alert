@@ -119,8 +119,8 @@ function _createColorSetting(setting) {
   return hbox;
 }
 
-function _createBlacklistSetting() {
-  let settingLabel = new Gtk.Label({label: _("Blacklist"), xalign: 0});
+function _createFilterListSetting() {
+  let settingLabel = new Gtk.Label({label: _("Filter List"), xalign: 0});
   let widget = new Widget();
   let blbox = new Gtk.Grid({column_spacing: 5, row_spacing: 5, margin: 0});
   blbox.attach(settingLabel,0,0,1,1);
@@ -393,7 +393,7 @@ function buildPrefsWidget() {
   vbox.add(filterType);
 
   // Add filter list
-  let blbox = _createBlacklistSetting();
+  let blbox = _createFilterListSetting();
   vbox.add(blbox);
 
   frame.add(vbox);
