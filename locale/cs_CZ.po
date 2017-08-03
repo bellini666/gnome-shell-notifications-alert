@@ -1,0 +1,51 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-08-03 08:33+0200\n"
+"PO-Revision-Date: 2017-08-03 08:47+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.1\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"Language: cs_CZ\n"
+
+#: src/prefs.js:121
+msgid "Alert color"
+msgstr "Zvýraznění barvou"
+
+#: src/prefs.js:122
+msgid "The color used to paint the message on user's menu"
+msgstr "Barva, kterou je zobrazena zpráva v uživatelské nabídce"
+
+#: src/prefs.js:128
+msgid "Blink rate (in ms)"
+msgstr "Rychlost blikání (v ms)"
+
+#: src/prefs.js:129
+msgid "The rate that the alert blinks, in ms. 0 means no blink (default: 800)"
+msgstr "Určuje, jakou rychlostí má problikávat zvýrazňující a výchozí barva (800=výchozí hodnota, méně=rychleji, více=pomaleji, 0=žádné blikání)"
+
+#: src/prefs.js:138
+msgid "Only alert for chat notifications"
+msgstr "Výrazně upozorňovat pouze na zprávy konverzací"
+
+#: src/prefs.js:139
+msgid "Only chat notifications (like Empathy ones) will get alerted (default: OFF)"
+msgstr "Pouze zprávy konverzací (například Empathy) budou zvýrazňovány (tato funkce je ve výchozím stavu vypnuta)"
+
+#: src/prefs.js:142
+msgid "Force alerting even when notifications are set to OFF"
+msgstr "Zvýrazňovat i pokud jsou notifikace vypnuty"
+
+#: src/prefs.js:143
+msgid "Alert even if you set notifications to OFF on user menu (default: OFF)"
+msgstr "Bude zvýrazňovat notifikace i když je jejich zobrazování vypnuto (tato funkce je ve výchozím stavu vypnuta)"
