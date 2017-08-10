@@ -5,7 +5,7 @@ SRC_PATH=src
 SCHEMAS_PATH=schemas
 LOCALE_DOMAIN=gnome-shell-notifications-alert
 LOCALE_PATH=locale
-LOCALES=pt_BR de_DE
+LOCALES=pt_BR de_DE cs_CZ
 
 locale:
 	for i in $(LOCALES); do \
