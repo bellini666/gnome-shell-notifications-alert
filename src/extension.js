@@ -163,11 +163,13 @@ function _MessageStyleHandler() {
     }
 
     let dateMenu = Main.panel.statusArea.dateMenu;
-    let actualStyle = dateMenu.actor.style;
-    let userStyle = "color: " + settings.get_string(SETTING_COLOR);
+    let actualStyle = (dateMenu.actor.style) ? dateMenu.actor.style : "";
 
-    dateMenu.actor.style = (actualStyle == this._oldStyle) ?
-      userStyle : this._oldStyle;
+    let userStyle = "color: " + settings.get_string(SETTING_COLOR) + ";";
+
+    dateMenu.actor.style = (dateMenu.actor.style == this._oldStyle) ?
+      actualStyle.concat(userStyle) : this._oldStyle;
+
 
     // keep looping
     return true;
