@@ -137,8 +137,8 @@ function _createFilterTypeSetting() {
     GObject.TYPE_STRING,
     GObject.TYPE_STRING]);
 
-  listStore.insert_with_valuesv (-1,  [0, 1], [0, "Blacklist"]);
-  listStore.insert_with_valuesv (-1,  [0, 1], [1, "Whitelist"]);
+  listStore.insert_with_valuesv (-1,  [0, 1], [0, _("Blacklist")]);
+  listStore.insert_with_valuesv (-1,  [0, 1], [1, _("Whitelist")]);
 
   let filterComboBox = new Gtk.ComboBox({ model: listStore });
   filterComboBox.set_active (settings.get_int(SETTING_FILTER_TYPE));

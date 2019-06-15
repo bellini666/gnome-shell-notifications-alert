@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-02 16:54-0200\n"
+"POT-Creation-Date: 2019-06-15 11:35-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,35 +17,71 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/prefs.js:121
+#: src/prefs.js:264
+msgid "Add"
+msgstr ""
+
+#: src/prefs.js:245
+msgid "Add Rule"
+msgstr ""
+
+#: src/prefs.js:173
 msgid "Alert color"
 msgstr ""
 
-#: src/prefs.js:122
-msgid "The color used to paint the message on user's menu"
+#: src/prefs.js:195
+msgid "Alert even if you set notifications to OFF on user menu (default: OFF)"
 msgstr ""
 
-#: src/prefs.js:128
+#: src/prefs.js:229
+msgid "Application"
+msgstr ""
+
+#: src/prefs.js:140
+msgid "Blacklist"
+msgstr ""
+
+#: src/prefs.js:259
+msgid "Blacklist app"
+msgstr ""
+
+#: src/prefs.js:180
 msgid "Blink rate (in ms)"
 msgstr ""
 
-#: src/prefs.js:129
-msgid "The rate that the alert blinks, in ms. 0 means no blink (default: 800)"
+#: src/prefs.js:269
+msgid "Choose an application to blacklist:"
 msgstr ""
 
-#: src/prefs.js:138
+#: src/prefs.js:123
+msgid "Filter List"
+msgstr ""
+
+#: src/prefs.js:133
+msgid "Filter Type"
+msgstr ""
+
+#: src/prefs.js:194
+msgid "Force alerting even when notifications are set to OFF"
+msgstr ""
+
+#: src/prefs.js:190
 msgid "Only alert for chat notifications"
 msgstr ""
 
-#: src/prefs.js:139
+#: src/prefs.js:191
 msgid ""
 "Only chat notifications (like Empathy ones) will get alerted (default: OFF)"
 msgstr ""
 
-#: src/prefs.js:142
-msgid "Force alerting even when notifications are set to OFF"
+#: src/prefs.js:174
+msgid "The color used to paint the message on user's menu"
 msgstr ""
 
-#: src/prefs.js:143
-msgid "Alert even if you set notifications to OFF on user menu (default: OFF)"
+#: src/prefs.js:181
+msgid "The rate that the alert blinks, in ms. 0 means no blink (default: 800)"
+msgstr ""
+
+#: src/prefs.js:141
+msgid "Whitelist"
 msgstr ""
