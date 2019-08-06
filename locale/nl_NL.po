@@ -1,0 +1,87 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-06-15 11:35-0300\n"
+"PO-Revision-Date: 2019-08-06 12:16+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2.3\n"
+"Last-Translator: Heimen Stoffels <vistausss@outlook.com>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: nl\n"
+
+#: src/prefs.js:264
+msgid "Add"
+msgstr "Toevoegen"
+
+#: src/prefs.js:245
+msgid "Add Rule"
+msgstr "Regel toevoegen"
+
+#: src/prefs.js:173
+msgid "Alert color"
+msgstr "Meldingskleur"
+
+#: src/prefs.js:195
+msgid "Alert even if you set notifications to OFF on user menu (default: OFF)"
+msgstr "Ook knipperen bij nieuwe meldingen als meldingen zijn uitgeschakeld (standaard: UIT)"
+
+#: src/prefs.js:229
+msgid "Application"
+msgstr "Toepassing"
+
+#: src/prefs.js:140
+msgid "Blacklist"
+msgstr "Zwarte lijst"
+
+#: src/prefs.js:259
+msgid "Blacklist app"
+msgstr "Toev. aan zwarte lijst"
+
+#: src/prefs.js:180
+msgid "Blink rate (in ms)"
+msgstr "Knippersnelheid (in ms)"
+
+#: src/prefs.js:269
+msgid "Choose an application to blacklist:"
+msgstr "Kies een toepassing voor de zwarte lijst:"
+
+#: src/prefs.js:123
+msgid "Filter List"
+msgstr "Filterlijst"
+
+#: src/prefs.js:133
+msgid "Filter Type"
+msgstr "Soort filter"
+
+#: src/prefs.js:194
+msgid "Force alerting even when notifications are set to OFF"
+msgstr "Knipperen bij nieuwe meldingen afdwingen als meldingen zijn uitgeschakeld"
+
+#: src/prefs.js:190
+msgid "Only alert for chat notifications"
+msgstr "Alleen knipperen bij chatmeldingen"
+
+#: src/prefs.js:191
+msgid "Only chat notifications (like Empathy ones) will get alerted (default: OFF)"
+msgstr "Alleen knipperen bij chatmeldingen (zoals bijv. die van Empathy - standaard: UIT)"
+
+#: src/prefs.js:174
+msgid "The color used to paint the message on user's menu"
+msgstr "De kleur van het knipperpatroon"
+
+#: src/prefs.js:181
+msgid "The rate that the alert blinks, in ms. 0 means no blink (default: 800)"
+msgstr "De snelheid waarmee wordt geknipperd, in ms. 0 = niet knipperen (standaard: 800)"
+
+#: src/prefs.js:141
+msgid "Whitelist"
+msgstr "Witte lijst"
