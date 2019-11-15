@@ -9,17 +9,15 @@ msgstr ""
 "Project-Id-Version: gnome-shell-notifications-alert\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-06-15 11:35-0300\n"
-"PO-Revision-Date: 2019-06-16 18:07+0200\n"
+"PO-Revision-Date: 2019-11-15 20:45+0100\n"
 "Last-Translator: Onno Giesmann <nutzer3105@gmail.com>\n"
 "Language-Team: German <--->\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"X-Poedit-Language: German\n"
-"X-Poedit-Country: GERMANY\n"
-"X-Generator: Gtranslator 3.32.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.2.4\n"
 
 #: src/prefs.js:264
 msgid "Add"
@@ -36,7 +34,7 @@ msgstr "Benachrichtigungsfarbe"
 #: src/prefs.js:195
 msgid "Alert even if you set notifications to OFF on user menu (default: OFF)"
 msgstr ""
-"Benachrichtigen trotzdem anzeigen, auch wenn sie im Nutzermenü ausgeschaltet "
+"Benachrichtigungen auch dann anzeigen, wenn sie im Nutzermenü ausgeschaltet "
 "sind (Vorgabe: AUS)"
 
 #: src/prefs.js:229
@@ -53,7 +51,7 @@ msgstr "Anwendung für schwarze Liste"
 
 #: src/prefs.js:180
 msgid "Blink rate (in ms)"
-msgstr "Blinkrate (in ms)"
+msgstr "Blinkgeschwindigkeit (in ms)"
 
 #: src/prefs.js:269
 msgid "Choose an application to blacklist:"
@@ -87,7 +85,9 @@ msgstr "Farbe, in der die Benachrichtigung im Nutzermenü erscheint"
 
 #: src/prefs.js:181
 msgid "The rate that the alert blinks, in ms. 0 means no blink (default: 800)"
-msgstr "Rate des Blinkens in ms. Wert 0 bedeutet kein Blinken (Vorgabe: 800)"
+msgstr ""
+"Gibt an, mit welcher Geschwindigkeit der Alarm blinkt (in ms). Wert 0 "
+"bedeutet kein Blinken (Vorgabe: 800)"
 
 #: src/prefs.js:141
 msgid "Whitelist"
