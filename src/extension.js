@@ -255,6 +255,9 @@ function init() {
 }
 
 function enable() {
+  if (MessageTray.Source.prototype.countUpdated == _countUpdated) {
+    return;
+  }
   originalCountUpdated = MessageTray.Source.prototype.countUpdated;
   originalDestroy = MessageTray.Source.prototype.destroy;
 
