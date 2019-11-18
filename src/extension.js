@@ -22,6 +22,7 @@
  *
  */
 
+const { Clutter, St } = imports.gi;
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
 const Main = imports.ui.main;
@@ -163,13 +164,12 @@ function _MessageStyleHandler() {
     }
 
     let dateMenu = Main.panel.statusArea.dateMenu;
-    let actualStyle = (dateMenu.actor.style) ? dateMenu.actor.style : "";
+    let actor = dateMenu instanceof Clutter.Actor ? dateMenu : dateMenu.actor;
+    let actualStyle = (actor.style) ? actor.style : "";
 
     let userStyle = "color: " + settings.get_string(SETTING_COLOR) + ";";
 
-    dateMenu.actor.style = (dateMenu.actor.style == this._oldStyle) ?
-      actualStyle.concat(userStyle) : this._oldStyle;
-
+    actor.style = (actor.style == this._oldStyle) ?  actualStyle.concat(userStyle) : this._oldStyle;
 
     // keep looping
     return true;
@@ -183,7 +183,8 @@ function _MessageStyleHandler() {
     let dateMenu = Main.panel.statusArea.dateMenu;
     let loopDelay = settings.get_int(SETTING_BLINK_RATE);
 
-    this._oldStyle = dateMenu.actor.style;
+    let actor = dateMenu instanceof Clutter.Actor ? dateMenu : dateMenu.actor;
+    this._oldStyle = actor.style;
     this._hasStyleAdded = true;
 
     if (loopDelay > 0) {
@@ -207,7 +208,8 @@ function _MessageStyleHandler() {
     }
 
     let dateMenu = Main.panel.statusArea.dateMenu;
-    dateMenu.actor.style = this._oldStyle;
+    let actor = dateMenu instanceof Clutter.Actor ? dateMenu : dateMenu.actor;
+    actor.style = this._oldStyle;
     this._oldStyle = null;
   }
 
@@ -253,6 +255,9 @@ function init() {
 }
 
 function enable() {
+  if (MessageTray.Source.prototype.countUpdated == _countUpdated) {
+    return;
+  }
   originalCountUpdated = MessageTray.Source.prototype.countUpdated;
   originalDestroy = MessageTray.Source.prototype.destroy;
 
