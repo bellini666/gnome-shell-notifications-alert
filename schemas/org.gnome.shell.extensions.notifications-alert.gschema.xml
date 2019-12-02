@@ -16,10 +16,25 @@
       <summary>Blink rate</summary>
       <description>The rate that the alert blinks, in ms. 0 means no blink</description>
     </key>
+    <key name="usecolor" type="b">
+      <default>true</default>
+      <summary>Use alert color</summary>
+      <description>Use the alert color for alert blinks</description>
+    </key>
     <key name="color" type="s">
       <default>'#ff0000'</default>
       <summary>Alert color</summary>
       <description>The color used to paint the message on user's menu</description>
+    </key>
+    <key name="usebackgroundcolor" type="b">
+      <default>false</default>
+      <summary>Use alert background color</summary>
+      <description>Use the alert background color for alert blinks</description>
+    </key>
+    <key name="backgroundcolor" type="s">
+      <default>'#ff0000'</default>
+      <summary>Alert background color</summary>
+      <description>The background color used to paint the message on user's menu</description>
     </key>
     <key name="application-list" type="as">
       <default>[ ]</default>
