@@ -34,7 +34,10 @@ const Me = ExtensionUtils.getCurrentExtension();
 const Lib = Me.imports.lib;
 
 const SETTING_BLINK_RATE = 'blinkrate';
+const SETTING_USECOLOR = 'usecolor';
 const SETTING_COLOR = 'color';
+const SETTING_USEBACKGROUNDCOLOR = 'usebackgroundcolor';
+const SETTING_BACKGROUNDCOLOR = 'backgroundcolor';
 const SETTING_CHAT_ONLY = 'chatonly';
 const SETTING_FORCE = 'force';
 const SETTING_BLACKLIST = 'application-list';
@@ -74,7 +77,10 @@ function _MessageStyleHandler() {
 
     // Connect settings change events, so we can update message style
     // as soon as the user makes the change
+    this._connectSetting(SETTING_USECOLOR);
     this._connectSetting(SETTING_COLOR);
+    this._connectSetting(SETTING_BACKGROUNDCOLOR);
+    this._connectSetting(SETTING_USEBACKGROUNDCOLOR);
     this._connectSetting(SETTING_CHAT_ONLY);
     this._connectSetting(SETTING_FORCE);
     this._connectSetting(SETTING_BLINK_RATE);
@@ -167,7 +173,13 @@ function _MessageStyleHandler() {
     let actor = dateMenu instanceof Clutter.Actor ? dateMenu : dateMenu.actor;
     let actualStyle = (actor.style) ? actor.style : "";
 
-    let userStyle = "color: " + settings.get_string(SETTING_COLOR) + ";";
+    let userStyle = "";
+    if (settings.get_boolean(SETTING_USECOLOR)) {
+	userStyle += "color: " + settings.get_string(SETTING_COLOR) + ";";
+    }
+    if (settings.get_boolean(SETTING_USEBACKGROUNDCOLOR)) {
+	userStyle += "background-color: " + settings.get_string(SETTING_BACKGROUNDCOLOR) + ";";
+    }
 
     actor.style = (actor.style == this._oldStyle) ?  actualStyle.concat(userStyle) : this._oldStyle;
 
