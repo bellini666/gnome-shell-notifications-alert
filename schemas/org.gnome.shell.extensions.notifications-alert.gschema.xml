@@ -18,12 +18,12 @@
     </key>
     <key name="usecolor" type="b">
       <default>true</default>
-      <summary>Use alert color</summary>
-      <description>Use the alert color for alert blinks</description>
+      <summary>Use alert font color</summary>
+      <description>Use the alert fontcolor for alert blinks</description>
     </key>
     <key name="color" type="s">
       <default>'#ff0000'</default>
-      <summary>Alert color</summary>
+      <summary>Alert font color</summary>
       <description>The color used to paint the message on user's menu</description>
     </key>
     <key name="usebackgroundcolor" type="b">

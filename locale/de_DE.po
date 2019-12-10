@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-notifications-alert\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-15 11:35-0300\n"
+"POT-Creation-Date: 2019-12-09 21:12-0300\n"
 "PO-Revision-Date: 2019-11-15 20:45+0100\n"
 "Last-Translator: Onno Giesmann <nutzer3105@gmail.com>\n"
 "Language-Team: German <--->\n"
@@ -19,25 +19,31 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.2.4\n"
 
-#: src/prefs.js:264
+#: src/prefs.js:276
 msgid "Add"
 msgstr "Hinzufügen"
 
-#: src/prefs.js:245
+#: src/prefs.js:257
 msgid "Add Rule"
 msgstr "Regel hinzufügen"
 
-#: src/prefs.js:173
-msgid "Alert color"
+#: src/prefs.js:177
+#, fuzzy
+msgid "Alert background color"
 msgstr "Benachrichtigungsfarbe"
 
-#: src/prefs.js:195
+#: src/prefs.js:207
 msgid "Alert even if you set notifications to OFF on user menu (default: OFF)"
 msgstr ""
 "Benachrichtigungen auch dann anzeigen, wenn sie im Nutzermenü ausgeschaltet "
 "sind (Vorgabe: AUS)"
 
-#: src/prefs.js:229
+#: src/prefs.js:173
+#, fuzzy
+msgid "Alert font color"
+msgstr "Benachrichtigungsfarbe"
+
+#: src/prefs.js:241
 msgid "Application"
 msgstr "Anwendung"
 
@@ -45,15 +51,15 @@ msgstr "Anwendung"
 msgid "Blacklist"
 msgstr "Schwarze Liste"
 
-#: src/prefs.js:259
+#: src/prefs.js:271
 msgid "Blacklist app"
 msgstr "Anwendung für schwarze Liste"
 
-#: src/prefs.js:180
+#: src/prefs.js:184
 msgid "Blink rate (in ms)"
 msgstr "Blinkgeschwindigkeit (in ms)"
 
-#: src/prefs.js:269
+#: src/prefs.js:281
 msgid "Choose an application to blacklist:"
 msgstr "Anwendung für schwarze Liste auswählen:"
 
@@ -65,29 +71,51 @@ msgstr "Filterliste"
 msgid "Filter Type"
 msgstr "Filtertyp"
 
-#: src/prefs.js:194
+#: src/prefs.js:206
 msgid "Force alerting even when notifications are set to OFF"
 msgstr "Auch benachrichtigen, wenn sie allgemein auf AUS gestellt sind"
 
-#: src/prefs.js:190
+#: src/prefs.js:202
 msgid "Only alert for chat notifications"
 msgstr "Nur bei Chat-Benachrichtigungen aktivieren"
 
-#: src/prefs.js:191
+#: src/prefs.js:203
 msgid ""
 "Only chat notifications (like Empathy ones) will get alerted (default: OFF)"
 msgstr ""
 "Benachrichtigt nur bei Chat-Meldungen (z.B. von Empathy) (Vorgabe: AUS)"
 
+#: src/prefs.js:178
+#, fuzzy
+msgid "The background color used to paint the message on user's menu"
+msgstr "Farbe, in der die Benachrichtigung im Nutzermenü erscheint"
+
 #: src/prefs.js:174
 msgid "The color used to paint the message on user's menu"
 msgstr "Farbe, in der die Benachrichtigung im Nutzermenü erscheint"
 
-#: src/prefs.js:181
+#: src/prefs.js:185
 msgid "The rate that the alert blinks, in ms. 0 means no blink (default: 800)"
 msgstr ""
 "Gibt an, mit welcher Geschwindigkeit der Alarm blinkt (in ms). Wert 0 "
 "bedeutet kein Blinken (Vorgabe: 800)"
+
+#: src/prefs.js:198
+msgid "Use alert background color"
+msgstr ""
+
+#: src/prefs.js:194
+#, fuzzy
+msgid "Use alert font color"
+msgstr "Benachrichtigungsfarbe"
+
+#: src/prefs.js:199
+msgid "Use the alert background color for alert blinks (default: OFF)"
+msgstr ""
+
+#: src/prefs.js:195
+msgid "Use the alert font color for alert blinks (default: ON)"
+msgstr ""
 
 #: src/prefs.js:141
 msgid "Whitelist"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-15 11:35-0300\n"
+"POT-Creation-Date: 2019-12-09 21:12-0300\n"
 "PO-Revision-Date: 2017-08-03 08:47+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,25 +18,31 @@ msgstr ""
 "X-Generator: Poedit 2.0.1\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
-#: src/prefs.js:264
+#: src/prefs.js:276
 msgid "Add"
 msgstr ""
 
-#: src/prefs.js:245
+#: src/prefs.js:257
 msgid "Add Rule"
 msgstr ""
 
-#: src/prefs.js:173
-msgid "Alert color"
+#: src/prefs.js:177
+#, fuzzy
+msgid "Alert background color"
 msgstr "Zvýraznění barvou"
 
-#: src/prefs.js:195
+#: src/prefs.js:207
 msgid "Alert even if you set notifications to OFF on user menu (default: OFF)"
 msgstr ""
 "Bude zvýrazňovat notifikace i když je jejich zobrazování vypnuto (tato "
 "funkce je ve výchozím stavu vypnuta)"
 
-#: src/prefs.js:229
+#: src/prefs.js:173
+#, fuzzy
+msgid "Alert font color"
+msgstr "Zvýraznění barvou"
+
+#: src/prefs.js:241
 msgid "Application"
 msgstr ""
 
@@ -44,15 +50,15 @@ msgstr ""
 msgid "Blacklist"
 msgstr ""
 
-#: src/prefs.js:259
+#: src/prefs.js:271
 msgid "Blacklist app"
 msgstr ""
 
-#: src/prefs.js:180
+#: src/prefs.js:184
 msgid "Blink rate (in ms)"
 msgstr "Rychlost blikání (v ms)"
 
-#: src/prefs.js:269
+#: src/prefs.js:281
 msgid "Choose an application to blacklist:"
 msgstr ""
 
@@ -64,30 +70,52 @@ msgstr ""
 msgid "Filter Type"
 msgstr ""
 
-#: src/prefs.js:194
+#: src/prefs.js:206
 msgid "Force alerting even when notifications are set to OFF"
 msgstr "Zvýrazňovat i pokud jsou notifikace vypnuty"
 
-#: src/prefs.js:190
+#: src/prefs.js:202
 msgid "Only alert for chat notifications"
 msgstr "Výrazně upozorňovat pouze na zprávy konverzací"
 
-#: src/prefs.js:191
+#: src/prefs.js:203
 msgid ""
 "Only chat notifications (like Empathy ones) will get alerted (default: OFF)"
 msgstr ""
 "Pouze zprávy konverzací (například Empathy) budou zvýrazňovány (tato funkce "
 "je ve výchozím stavu vypnuta)"
 
+#: src/prefs.js:178
+#, fuzzy
+msgid "The background color used to paint the message on user's menu"
+msgstr "Barva, kterou je zobrazena zpráva v uživatelské nabídce"
+
 #: src/prefs.js:174
 msgid "The color used to paint the message on user's menu"
 msgstr "Barva, kterou je zobrazena zpráva v uživatelské nabídce"
 
-#: src/prefs.js:181
+#: src/prefs.js:185
 msgid "The rate that the alert blinks, in ms. 0 means no blink (default: 800)"
 msgstr ""
 "Určuje, jakou rychlostí má problikávat zvýrazňující a výchozí barva "
 "(800=výchozí hodnota, méně=rychleji, více=pomaleji, 0=žádné blikání)"
+
+#: src/prefs.js:198
+msgid "Use alert background color"
+msgstr ""
+
+#: src/prefs.js:194
+#, fuzzy
+msgid "Use alert font color"
+msgstr "Zvýraznění barvou"
+
+#: src/prefs.js:199
+msgid "Use the alert background color for alert blinks (default: OFF)"
+msgstr ""
+
+#: src/prefs.js:195
+msgid "Use the alert font color for alert blinks (default: ON)"
+msgstr ""
 
 #: src/prefs.js:141
 msgid "Whitelist"

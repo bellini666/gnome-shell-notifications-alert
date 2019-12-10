@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-15 11:35-0300\n"
+"POT-Creation-Date: 2019-12-09 21:12-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,23 +17,27 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/prefs.js:264
+#: src/prefs.js:276
 msgid "Add"
 msgstr ""
 
-#: src/prefs.js:245
+#: src/prefs.js:257
 msgid "Add Rule"
 msgstr ""
 
-#: src/prefs.js:173
-msgid "Alert color"
+#: src/prefs.js:177
+msgid "Alert background color"
 msgstr ""
 
-#: src/prefs.js:195
+#: src/prefs.js:207
 msgid "Alert even if you set notifications to OFF on user menu (default: OFF)"
 msgstr ""
 
-#: src/prefs.js:229
+#: src/prefs.js:173
+msgid "Alert font color"
+msgstr ""
+
+#: src/prefs.js:241
 msgid "Application"
 msgstr ""
 
@@ -41,15 +45,15 @@ msgstr ""
 msgid "Blacklist"
 msgstr ""
 
-#: src/prefs.js:259
+#: src/prefs.js:271
 msgid "Blacklist app"
 msgstr ""
 
-#: src/prefs.js:180
+#: src/prefs.js:184
 msgid "Blink rate (in ms)"
 msgstr ""
 
-#: src/prefs.js:269
+#: src/prefs.js:281
 msgid "Choose an application to blacklist:"
 msgstr ""
 
@@ -61,25 +65,45 @@ msgstr ""
 msgid "Filter Type"
 msgstr ""
 
-#: src/prefs.js:194
+#: src/prefs.js:206
 msgid "Force alerting even when notifications are set to OFF"
 msgstr ""
 
-#: src/prefs.js:190
+#: src/prefs.js:202
 msgid "Only alert for chat notifications"
 msgstr ""
 
-#: src/prefs.js:191
+#: src/prefs.js:203
 msgid ""
 "Only chat notifications (like Empathy ones) will get alerted (default: OFF)"
+msgstr ""
+
+#: src/prefs.js:178
+msgid "The background color used to paint the message on user's menu"
 msgstr ""
 
 #: src/prefs.js:174
 msgid "The color used to paint the message on user's menu"
 msgstr ""
 
-#: src/prefs.js:181
+#: src/prefs.js:185
 msgid "The rate that the alert blinks, in ms. 0 means no blink (default: 800)"
+msgstr ""
+
+#: src/prefs.js:198
+msgid "Use alert background color"
+msgstr ""
+
+#: src/prefs.js:194
+msgid "Use alert font color"
+msgstr ""
+
+#: src/prefs.js:199
+msgid "Use the alert background color for alert blinks (default: OFF)"
+msgstr ""
+
+#: src/prefs.js:195
+msgid "Use the alert font color for alert blinks (default: ON)"
 msgstr ""
 
 #: src/prefs.js:141

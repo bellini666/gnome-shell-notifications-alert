@@ -170,7 +170,7 @@ function init() {
 
   colorSettings = {
     color: {
-      label: _("Alert color"),
+      label: _("Alert font color"),
       help: _("The color used to paint the message on user's menu")
     },
     backgroundcolor: {
@@ -191,8 +191,8 @@ function init() {
 
   boolSettings = {
     usecolor: {
-      label: _("Use alert color"),
-      help: _("Use the alert color for alert blinks (default: ON)")
+      label: _("Use alert font color"),
+      help: _("Use the alert font color for alert blinks (default: ON)")
     },
     usebackgroundcolor: {
       label: _("Use alert background color"),
