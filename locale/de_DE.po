@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: gnome-shell-notifications-alert\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-09 21:12-0300\n"
-"PO-Revision-Date: 2019-11-15 20:45+0100\n"
+"PO-Revision-Date: 2019-12-29 21:14+0100\n"
 "Last-Translator: Onno Giesmann <nutzer3105@gmail.com>\n"
 "Language-Team: German <--->\n"
 "Language: de\n"
@@ -28,9 +28,8 @@ msgid "Add Rule"
 msgstr "Regel hinzufügen"
 
 #: src/prefs.js:177
-#, fuzzy
 msgid "Alert background color"
-msgstr "Benachrichtigungsfarbe"
+msgstr "Hintergrundfarbe bei Benachrichtigung"
 
 #: src/prefs.js:207
 msgid "Alert even if you set notifications to OFF on user menu (default: OFF)"
@@ -39,9 +38,8 @@ msgstr ""
 "sind (Vorgabe: AUS)"
 
 #: src/prefs.js:173
-#, fuzzy
 msgid "Alert font color"
-msgstr "Benachrichtigungsfarbe"
+msgstr "Schriftfarbe bei Benachrichtigung"
 
 #: src/prefs.js:241
 msgid "Application"
@@ -86,13 +84,16 @@ msgstr ""
 "Benachrichtigt nur bei Chat-Meldungen (z.B. von Empathy) (Vorgabe: AUS)"
 
 #: src/prefs.js:178
-#, fuzzy
 msgid "The background color used to paint the message on user's menu"
-msgstr "Farbe, in der die Benachrichtigung im Nutzermenü erscheint"
+msgstr ""
+"Diese Farbe wird verwendet, um den Hintergrund vom Nutzermenü bei "
+"Benachrichtigungen entsprechend einzufärben"
 
 #: src/prefs.js:174
 msgid "The color used to paint the message on user's menu"
-msgstr "Farbe, in der die Benachrichtigung im Nutzermenü erscheint"
+msgstr ""
+"Diese Farbe wird verwendet, um die Schrift im Nutzermenü bei "
+"Benachrichtigungen entsprechend einzufärben"
 
 #: src/prefs.js:185
 msgid "The rate that the alert blinks, in ms. 0 means no blink (default: 800)"
@@ -102,20 +103,23 @@ msgstr ""
 
 #: src/prefs.js:198
 msgid "Use alert background color"
-msgstr ""
+msgstr "Hintergrundfarbe bei Benachrichtigung anwenden"
 
 #: src/prefs.js:194
-#, fuzzy
 msgid "Use alert font color"
-msgstr "Benachrichtigungsfarbe"
+msgstr "Schriftfarbe bei Benachrichtigung anwenden"
 
 #: src/prefs.js:199
 msgid "Use the alert background color for alert blinks (default: OFF)"
 msgstr ""
+"Bei Benachrichtigungen wird der Hintergrund entsprechend dem eingestellten "
+"Wert eingefärbt (Vorgabe: AUS)"
 
 #: src/prefs.js:195
 msgid "Use the alert font color for alert blinks (default: ON)"
 msgstr ""
+"Bei Benachrichtigungen wird die Schrift entsprechend dem eingestellten Wert "
+"eingefärbt (Vorgabe: AN)"
 
 #: src/prefs.js:141
 msgid "Whitelist"
