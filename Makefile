@@ -1,5 +1,6 @@
 UUID=notifications-alert-on-user-menu@hackedbellini.gmail.com
 INSTALL_PATH=~/.local/share/gnome-shell/extensions/$(UUID)
+UPDATE_PATH=~/.local/share/gnome-shell/extension-updates/$(UUID)
 ZIP_PATH=$(UUID).zip
 SRC_PATH=src
 SCHEMAS_PATH=schemas
@@ -26,6 +27,10 @@ zip-file: locale
 install: zip-file
 	mkdir -p $(INSTALL_PATH) && \
 	unzip -o $(ZIP_PATH) -d $(INSTALL_PATH)
+
+update: zip-file
+	mkdir -p $(UPDATE_PATH) && \
+	unzip -o $(ZIP_PATH) -d $(UPDATE_PATH)
 
 uninstall:
 	rm $(INSTALL_PATH) -rf
