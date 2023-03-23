@@ -23,7 +23,6 @@
  */
 
 const { Clutter, St } = imports.gi;
-const Lang = imports.lang;
 const Mainloop = imports.mainloop;
 const Main = imports.ui.main;
 const MessageTray = imports.ui.messageTray;
@@ -60,20 +59,20 @@ function _MessageStyleHandler() {
     this._hasStyleAdded = false;
 
     this._presence = new GnomeSession.Presence(
-      Lang.bind(this, function(proxy, error) {
+      (proxy, error) => {
         if (error) {
           logError(error, 'Error while reading gnome-session presence');
           return;
         }
-    }));
+    });
   }
 
   this.enable = function() {
     this._statusChangedId = this._presence.connectSignal(
-      'StatusChanged', Lang.bind(this, function(proxy, senderName, [status]) {
+      'StatusChanged', (proxy, senderName, [status]) => {
         this._presence.status = status;
         this._onNotificationsSwitchToggled();
-    }));
+    });
 
     // Connect settings change events, so we can update message style
     // as soon as the user makes the change
@@ -147,7 +146,7 @@ function _MessageStyleHandler() {
 
   this._connectSetting = function(setting) {
     this._signals[setting] = settings.connect(
-      "changed::" + setting, Lang.bind(this, this._onSettingsChanged));
+      "changed::" + setting, this._onSettingsChanged.bind(this));
   }
 
   this._hasNotifications = function(source) {
@@ -201,7 +200,7 @@ function _MessageStyleHandler() {
 
     if (loopDelay > 0) {
       this._loopTimeoutId = Mainloop.timeout_add(
-          loopDelay, Lang.bind(this, this._toggleStyle))
+          loopDelay, this._toggleStyle.bind(this))
     } else {
       this._toggleStyle();
     }
