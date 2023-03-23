@@ -258,8 +258,8 @@ function _destroy() {
 */
 
 function init() {
-  Lib.initTranslations(Me);
-  settings = Lib.getSettings(Me);
+  ExtensionUtils.initTranslations();
+  settings = ExtensionUtils.getSettings();
 
   messageStyleHandler = new _MessageStyleHandler();
   messageStyleHandler.init();

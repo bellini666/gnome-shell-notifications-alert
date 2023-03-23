@@ -164,8 +164,8 @@ function _createFilterTypeSetting() {
 */
 
 function init() {
-  Lib.initTranslations(Me);
-  settings = Lib.getSettings(Me);
+  ExtensionUtils.initTranslations();
+  settings = ExtensionUtils.getSettings();
 
   colorSettings = {
     color: {
@@ -221,8 +221,8 @@ const Widget = new GObject.Class({
     this.parent(params);
     this.set_orientation(Gtk.Orientation.VERTICAL);
 
-    Lib.initTranslations(Me);
-    this._settings = Lib.getSettings(Me);
+    ExtensionUtils.initTranslations();
+    this._settings = ExtensionUtils.getSettings();
 
     this._store = new Gtk.ListStore();
     this._store.set_column_types([Gio.AppInfo, GObject.TYPE_STRING, Gio.Icon]);
