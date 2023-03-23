@@ -1,7 +1,10 @@
 {
   "shell-version": [
     "40",
-    "41"
+    "41",
+    "42",
+    "43",
+    "44"
   ],
   "uuid": "notifications-alert-on-user-menu@hackedbellini.gmail.com",
   "name": "Notifications Alert",
