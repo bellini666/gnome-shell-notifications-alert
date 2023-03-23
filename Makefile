@@ -19,7 +19,7 @@ zip-file: locale
 	glib-compile-schemas $(SCHEMAS_PATH) \
 		--targetdir=$(SCHEMAS_PATH) \
 		--strict && \
-	zip -r -u $(ZIP_PATH) $(LOCALE_PATH) && \
+	zip -r -u $(ZIP_PATH) $(LOCALE_PATH) -x '*.po' '*.pot' && \
 	zip -r -u $(ZIP_PATH) $(SCHEMAS_PATH) && \
 	cd $(SRC_PATH) && \
 	zip -r -u ../$(ZIP_PATH) .
