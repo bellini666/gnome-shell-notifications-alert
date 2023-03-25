@@ -207,16 +207,17 @@ function _MessageStyleHandler() {
   }
 
   this._removeMessageStyle = function() {
-    if (!this._hasStyleAdded) {
-      return;
-    }
-
-    this._hasStyleAdded = false;
     if (this._loopTimeoutId != null) {
       // Stop the looping
       Mainloop.source_remove(this._loopTimeoutId);
       this._loopTimeoutId = null;
     }
+    
+    if (!this._hasStyleAdded) {
+      return;
+    }
+
+    this._hasStyleAdded = false;
 
     let dateMenu = Main.panel.statusArea.dateMenu;
     let actor = dateMenu instanceof Clutter.Actor ? dateMenu : dateMenu.actor;
