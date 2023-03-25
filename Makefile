@@ -6,7 +6,15 @@ SRC_PATH=src
 SCHEMAS_PATH=schemas
 LOCALE_DOMAIN=gnome-shell-notifications-alert
 LOCALE_PATH=locale
+LOCALES_TEMPLATE=${LOCALE_PATH}/messages.pot
 LOCALES=pt_BR de_DE cs_CZ nl_NL
+
+locale-files:
+	xgettext --from-code=UTF-8 --keyword=_ --sort-output --language=JavaScript src/*.js -o "${LOCALES_TEMPLATE}" && \
+	xgettext --join-existing --from-code=UTF-8 --keyword=translatable --sort-output --language=Glade src/*.ui -o "${LOCALES_TEMPLATE}" && \
+	for i in $(LOCALES); do \
+		msgmerge -U "$(LOCALE_PATH)/$$i.po" "${LOCALES_TEMPLATE}"; \
+	done
 
 locale:
 	for i in $(LOCALES); do \
