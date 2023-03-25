@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface domain="gnome-shell-notifications-alert">
+  <template class="PrefsWidget" parent="GtkBox">
+    <property name="visible">True</property>
+    <property name="can-focus">True</property>
+    <property name="orientation">vertical</property>
+    <property name="spacing">15</property>
+    <child>
+      <object class="GtkBox">
+        <property name="visible">True</property>
+        <property name="can-focus">True</property>
+        <property name="margin-start">20</property>
+        <property name="margin-end">20</property>
+        <property name="margin-top">10</property>
+        <property name="margin-bottom">20</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">5</property>
+        <child>
+          <object class="GtkBox">
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="tooltip-text" translatable="yes">The color used to paint the message on user's menu</property>
+                <property name="halign">start</property>
+                <property name="margin-end">5</property>
+                <property name="hexpand">True</property>
+                <property name="label" translatable="yes">Alert font color</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkColorButton" id="font_color">
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <property name="tooltip-text" translatable="yes">The color used to paint the message on user's menu</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkBox">
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="tooltip-text" translatable="yes">The background color used to paint the message on user's menu</property>
+                <property name="halign">start</property>
+                <property name="margin-end">5</property>
+                <property name="hexpand">True</property>
+                <property name="label" translatable="yes">Alert background color</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkColorButton" id="background_color">
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <property name="tooltip-text" translatable="yes">The background color used to paint the message on user's menu</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkBox">
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="tooltip-text" translatable="yes">Use the alert font color for alert blinks (default: ON)</property>
+                <property name="halign">start</property>
+                <property name="margin-end">5</property>
+                <property name="hexpand">True</property>
+                <property name="label" translatable="yes">Use alert font color</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkSwitch" id="use_font_color">
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="tooltip-text" translatable="yes">Use the alert font color for alert blinks (default: ON)</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkBox">
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="tooltip-text" translatable="yes">Use the alert background color for alert blinks (default: OFF)</property>
+                <property name="halign">start</property>
+                <property name="margin-end">5</property>
+                <property name="hexpand">True</property>
+                <property name="label" translatable="yes">Use alert background color</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkSwitch" id="use_background_color">
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="tooltip-text" translatable="yes">Use the alert background color for alert blinks (default: OFF)</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkBox">
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="tooltip-text" translatable="yes">Only chat notifications (like Empathy ones) will get alerted (default: OFF)</property>
+                <property name="halign">start</property>
+                <property name="margin-end">5</property>
+                <property name="hexpand">True</property>
+                <property name="label" translatable="yes">Only alert for chat notifications</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkSwitch" id="chat_only">
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="tooltip-text" translatable="yes">Only chat notifications (like Empathy ones) will get alerted (default: OFF)</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkBox">
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="tooltip-text" translatable="yes">Alert even if you set notifications to OFF on user menu (default: OFF)</property>
+                <property name="halign">start</property>
+                <property name="margin-end">5</property>
+                <property name="hexpand">True</property>
+                <property name="label" translatable="yes">Force alerting even when notifications are set to OFF</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkSwitch" id="force_alerting">
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="tooltip-text" translatable="yes">Alert even if you set notifications to OFF on user menu (default: OFF)</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkBox">
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="tooltip-text" translatable="yes">The rate that the alert blinks, in ms. 0 means no blink (default: 800)</property>
+                <property name="halign">start</property>
+                <property name="margin-end">5</property>
+                <property name="hexpand">True</property>
+                <property name="label" translatable="yes">Blink rate (in ms)</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkAdjustment" id="adjustment_blink_rate">
+                <property name="lower">0</property>
+                <property name="upper">10000</property>
+                <property name="value">800</property>
+                <property name="step-increment">1</property>
+              </object>
+              <object class="GtkSpinButton" id="blink_rate">
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="tooltip-text" translatable="yes">The rate that the alert blinks, in ms. 0 means no blink (default: 800)</property>
+                <property name="adjustment">adjustment_blink_rate</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkBox">
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="halign">start</property>
+                <property name="margin-end">5</property>
+                <property name="hexpand">True</property>
+                <property name="label" translatable="yes">Filter Type</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkComboBoxText" id="filter_type">
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <items>
+                  <item translatable="yes">Blacklist</item>
+                  <item translatable="yes">Whitelist</item>
+                </items>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkBox" id="filter_box">
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>
