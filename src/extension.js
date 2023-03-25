@@ -259,13 +259,14 @@ function _destroy() {
 
 function init() {
   ExtensionUtils.initTranslations();
+}
+
+function enable() {
   settings = ExtensionUtils.getSettings();
 
   messageStyleHandler = new _MessageStyleHandler();
   messageStyleHandler.init();
-}
 
-function enable() {
   if (MessageTray.Source.prototype.countUpdated == _countUpdated) {
     return;
   }
@@ -283,4 +284,9 @@ function disable() {
   MessageTray.Source.prototype.destroy = originalDestroy;
 
   messageStyleHandler.disable();
+
+  settings = null;
+  messageStyleHandler = null;
+  originalCountUpdated = null;
+  originalDestroy = null;
 }
