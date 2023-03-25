@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-notifications-alert\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-09 21:12-0300\n"
+"POT-Creation-Date: 2023-03-25 10:34+0100\n"
 "PO-Revision-Date: 2013-02-02 17:09-0200\n"
 "Last-Translator: Thiago Bellini <hackedbellini@gmail.com>\n"
 "Language-Team: Brazilian Portuguese\n"
@@ -17,100 +17,100 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: src/prefs.js:276
+#: src/prefs.js:114
 msgid "Add"
 msgstr "Adicionar"
 
-#: src/prefs.js:257
+#: src/prefs.js:96
 msgid "Add Rule"
 msgstr "Adicionar Regra"
 
-#: src/prefs.js:177
+#: src/prefs.ui:55
 msgid "Alert background color"
 msgstr "Cor de fundo do alerta"
 
-#: src/prefs.js:207
+#: src/prefs.ui:148 src/prefs.ui:159
 msgid "Alert even if you set notifications to OFF on user menu (default: OFF)"
 msgstr ""
 "Alertar mesmo se as suas notificações estão desligadas no menu do usuário "
 "(padrão: Desligado)"
 
-#: src/prefs.js:173
+#: src/prefs.ui:30
 msgid "Alert font color"
 msgstr "Cor da fonte do alerta"
 
-#: src/prefs.js:241
+#: src/prefs.js:80
 msgid "Application"
 msgstr "Aplicativo"
 
-#: src/prefs.js:140
+#: src/prefs.ui:214
 msgid "Blacklist"
 msgstr "Lista negra"
 
-#: src/prefs.js:271
+#: src/prefs.js:109
 msgid "Blacklist app"
 msgstr "Aplicativos na lista negra"
 
-#: src/prefs.js:184
+#: src/prefs.ui:176
 msgid "Blink rate (in ms)"
 msgstr "Taxa de intermitência (em ms)"
 
-#: src/prefs.js:281
+#: src/prefs.js:119
 msgid "Choose an application to blacklist:"
 msgstr "Escolha um aplicativo para adicionar na lista negra:"
 
-#: src/prefs.js:123
+#: src/prefs.js:44
 msgid "Filter List"
 msgstr "Lista do filtro"
 
-#: src/prefs.js:133
+#: src/prefs.ui:206
 msgid "Filter Type"
 msgstr "Tipo do filtro"
 
-#: src/prefs.js:206
+#: src/prefs.ui:152
 msgid "Force alerting even when notifications are set to OFF"
 msgstr "Alerta forçado mesmo quando as notificações estão desligadas"
 
-#: src/prefs.js:202
+#: src/prefs.ui:128
 msgid "Only alert for chat notifications"
 msgstr "Alertar apenas para notificações de bate-papo"
 
-#: src/prefs.js:203
+#: src/prefs.ui:124 src/prefs.ui:135
 msgid ""
 "Only chat notifications (like Empathy ones) will get alerted (default: OFF)"
 msgstr ""
 "Apenas notificações de bate-papo (como as do Empathy) serão alertadas "
 "(padrão: Desligado)"
 
-#: src/prefs.js:178
+#: src/prefs.ui:51 src/prefs.ui:63
 msgid "The background color used to paint the message on user's menu"
 msgstr "A cor utilizada para pintar o fundo da mensagem no menu do usuário"
 
-#: src/prefs.js:174
+#: src/prefs.ui:26 src/prefs.ui:38
 msgid "The color used to paint the message on user's menu"
 msgstr "A cor utilizada para pintar a mensagem no menu do usuário"
 
-#: src/prefs.js:185
+#: src/prefs.ui:172 src/prefs.ui:189
 msgid "The rate that the alert blinks, in ms. 0 means no blink (default: 800)"
 msgstr ""
 "A taxa em que o alerta pisca, em ms. 0 significa não piscar (padrão: 800)"
 
-#: src/prefs.js:198
+#: src/prefs.ui:104
 msgid "Use alert background color"
 msgstr "Usar cor de fundo do alerta"
 
-#: src/prefs.js:194
+#: src/prefs.ui:80
 msgid "Use alert font color"
 msgstr "Cor da fonte do alerta"
 
-#: src/prefs.js:199
+#: src/prefs.ui:100 src/prefs.ui:111
 msgid "Use the alert background color for alert blinks (default: OFF)"
 msgstr "Usar a cor de fundo do alerta ao piscar (padrão: Desligado)"
 
-#: src/prefs.js:195
+#: src/prefs.ui:76 src/prefs.ui:87
 msgid "Use the alert font color for alert blinks (default: ON)"
 msgstr "Usar a cor da fonte do alerta ao piscar (padrão: Ligado)"
 
-#: src/prefs.js:141
+#: src/prefs.ui:215
 msgid "Whitelist"
 msgstr "Lista branca"
