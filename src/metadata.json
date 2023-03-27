@@ -6,6 +6,8 @@
     "43",
     "44"
   ],
+  "gettext-domain": "gnome-shell-notifications-alert",
+  "settings-schema": "org.gnome.shell.extensions.notifications-alert",
   "uuid": "notifications-alert-on-user-menu@hackedbellini.gmail.com",
   "name": "Notifications Alert",
   "original-authors": [

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-09 21:12-0300\n"
+"POT-Creation-Date: 2023-03-25 10:34+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,95 +17,95 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/prefs.js:276
+#: src/prefs.js:114
 msgid "Add"
 msgstr ""
 
-#: src/prefs.js:257
+#: src/prefs.js:96
 msgid "Add Rule"
 msgstr ""
 
-#: src/prefs.js:177
+#: src/prefs.ui:55
 msgid "Alert background color"
 msgstr ""
 
-#: src/prefs.js:207
+#: src/prefs.ui:148 src/prefs.ui:159
 msgid "Alert even if you set notifications to OFF on user menu (default: OFF)"
 msgstr ""
 
-#: src/prefs.js:173
+#: src/prefs.ui:30
 msgid "Alert font color"
 msgstr ""
 
-#: src/prefs.js:241
+#: src/prefs.js:80
 msgid "Application"
 msgstr ""
 
-#: src/prefs.js:140
+#: src/prefs.ui:214
 msgid "Blacklist"
 msgstr ""
 
-#: src/prefs.js:271
+#: src/prefs.js:109
 msgid "Blacklist app"
 msgstr ""
 
-#: src/prefs.js:184
+#: src/prefs.ui:176
 msgid "Blink rate (in ms)"
 msgstr ""
 
-#: src/prefs.js:281
+#: src/prefs.js:119
 msgid "Choose an application to blacklist:"
 msgstr ""
 
-#: src/prefs.js:123
+#: src/prefs.js:44
 msgid "Filter List"
 msgstr ""
 
-#: src/prefs.js:133
+#: src/prefs.ui:206
 msgid "Filter Type"
 msgstr ""
 
-#: src/prefs.js:206
+#: src/prefs.ui:152
 msgid "Force alerting even when notifications are set to OFF"
 msgstr ""
 
-#: src/prefs.js:202
+#: src/prefs.ui:128
 msgid "Only alert for chat notifications"
 msgstr ""
 
-#: src/prefs.js:203
+#: src/prefs.ui:124 src/prefs.ui:135
 msgid ""
 "Only chat notifications (like Empathy ones) will get alerted (default: OFF)"
 msgstr ""
 
-#: src/prefs.js:178
+#: src/prefs.ui:51 src/prefs.ui:63
 msgid "The background color used to paint the message on user's menu"
 msgstr ""
 
-#: src/prefs.js:174
+#: src/prefs.ui:26 src/prefs.ui:38
 msgid "The color used to paint the message on user's menu"
 msgstr ""
 
-#: src/prefs.js:185
+#: src/prefs.ui:172 src/prefs.ui:189
 msgid "The rate that the alert blinks, in ms. 0 means no blink (default: 800)"
 msgstr ""
 
-#: src/prefs.js:198
+#: src/prefs.ui:104
 msgid "Use alert background color"
 msgstr ""
 
-#: src/prefs.js:194
+#: src/prefs.ui:80
 msgid "Use alert font color"
 msgstr ""
 
-#: src/prefs.js:199
+#: src/prefs.ui:100 src/prefs.ui:111
 msgid "Use the alert background color for alert blinks (default: OFF)"
 msgstr ""
 
-#: src/prefs.js:195
+#: src/prefs.ui:76 src/prefs.ui:87
 msgid "Use the alert font color for alert blinks (default: ON)"
 msgstr ""
 
-#: src/prefs.js:141
+#: src/prefs.ui:215
 msgid "Whitelist"
 msgstr ""

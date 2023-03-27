@@ -40,84 +40,6 @@ const Columns = {
   ICON: 2,
 };
 
-let settings;
-let boolSettings;
-let intSettings;
-let colorSettings;
-
-function _createBoolSetting(setting) {
-  let hbox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL});
-
-  let settingLabel = new Gtk.Label({label: boolSettings[setting].label,
-                                    xalign: 0, hexpand: true});
-
-  let settingSwitch = new Gtk.Switch({active: settings.get_boolean(setting)});
-  settingSwitch.connect('notify::active', function(button) {
-    settings.set_boolean(setting, button.active);
-  });
-
-  if (boolSettings[setting].help) {
-    settingLabel.set_tooltip_text(boolSettings[setting].help);
-    settingSwitch.set_tooltip_text(boolSettings[setting].help);
-  }
-
-  hbox.prepend(settingLabel);
-  hbox.append(settingSwitch);
-
-  return hbox;
-}
-
-function _createIntSetting(setting) {
-  let hbox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL});
-
-  let settingLabel = new Gtk.Label({label: intSettings[setting].label,
-                                    xalign: 0, hexpand: true});
-
-  let spinButton = Gtk.SpinButton.new_with_range(
-    intSettings[setting].min,
-    intSettings[setting].max,
-    intSettings[setting].step)
-  spinButton.set_value(settings.get_int(setting));
-  spinButton.connect('notify::value', function(spin) {
-    settings.set_int(setting, spin.get_value_as_int());
-  });
-
-  if (intSettings[setting].help) {
-    settingLabel.set_tooltip_text(intSettings[setting].help);
-    spinButton.set_tooltip_text(intSettings[setting].help);
-  }
-
-  hbox.prepend(settingLabel);
-  hbox.append(spinButton);
-
-  return hbox;
-}
-
-function _createColorSetting(setting) {
-  let hbox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL});
-
-  let settingLabel = new Gtk.Label({label: colorSettings[setting].label,
-                                    xalign: 0, hexpand: true});
-
-  let color = Lib.getRGBAColor(settings.get_string(setting));
-  let colorButton = new Gtk.ColorButton();
-  colorButton.set_rgba(color);
-  colorButton.connect('notify::rgba', function(button) {
-    let rgba = button.get_rgba().to_string();
-    settings.set_string(setting, rgba);
-  });
-
-  if (colorSettings[setting].help) {
-    settingLabel.set_tooltip_text(colorSettings[setting].help);
-    colorButton.set_tooltip_text(colorSettings[setting].help);
-  }
-
-  hbox.prepend(settingLabel);
-  hbox.append(colorButton);
-
-  return hbox;
-}
-
 function _createFilterListSetting() {
   let settingLabel = new Gtk.Label({label: _("Filter List"), xalign: 0});
   let widget = new Widget();
@@ -126,88 +48,6 @@ function _createFilterListSetting() {
   blbox.attach(widget,0,1,1,1);
   return blbox;
 }
-
-function _createFilterTypeSetting() {
-  let hbox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL});
-  let settingLabel = new Gtk.Label({label: _("Filter Type"), xalign: 0, hexpand: true});
-
-  let listStore = new Gtk.ListStore();
-  listStore.set_column_types ([
-    GObject.TYPE_STRING,
-    GObject.TYPE_STRING]);
-
-  listStore.insert_with_values (-1,  [0, 1], [0, _("Blacklist")]); //valuesv
-  listStore.insert_with_values (-1,  [0, 1], [1, _("Whitelist")]); //valuesv
-
-  let filterComboBox = new Gtk.ComboBox({ model: listStore });
-  filterComboBox.set_active (settings.get_int(SETTING_FILTER_TYPE));
-  filterComboBox.set_id_column(0);
-
-  let rendererText = new Gtk.CellRendererText();
-  filterComboBox.pack_start (rendererText, false);
-  filterComboBox.add_attribute (rendererText, "text", 1);
-
-  filterComboBox.connect('changed', function(entry) {
-    let id = filterComboBox.get_active_id();
-    if (id == null)
-        return;
-    settings.set_int(SETTING_FILTER_TYPE, id);
-  });
-
-  hbox.prepend(settingLabel);
-  hbox.append(filterComboBox);
-  return hbox;
-}
-
-/*
-   Shell-extensions handlers
-*/
-
-function init() {
-  Lib.initTranslations(Me);
-  settings = Lib.getSettings(Me);
-
-  colorSettings = {
-    color: {
-      label: _("Alert font color"),
-      help: _("The color used to paint the message on user's menu")
-    },
-    backgroundcolor: {
-      label: _("Alert background color"),
-      help: _("The background color used to paint the message on user's menu")
-    },
-  };
-
-  intSettings = {
-    blinkrate: {
-      label: _("Blink rate (in ms)"),
-      help: _("The rate that the alert blinks, in ms. 0 means no blink (default: 800)"),
-      min: 0,
-      max: 10000,
-      step: 1
-    },
-  };
-
-  boolSettings = {
-    usecolor: {
-      label: _("Use alert font color"),
-      help: _("Use the alert font color for alert blinks (default: ON)")
-    },
-    usebackgroundcolor: {
-      label: _("Use alert background color"),
-      help: _("Use the alert background color for alert blinks (default: OFF)")
-    },
-    chatonly: {
-      label: _("Only alert for chat notifications"),
-      help: _("Only chat notifications (like Empathy ones) will get alerted (default: OFF)")
-    },
-    force: {
-      label: _("Force alerting even when notifications are set to OFF"),
-      help: _("Alert even if you set notifications to OFF on user menu (default: OFF)")
-    },
-  };
-}
-
 
 /*
    Blacklist widget
@@ -221,8 +61,8 @@ const Widget = new GObject.Class({
     this.parent(params);
     this.set_orientation(Gtk.Orientation.VERTICAL);
 
-    Lib.initTranslations(Me);
-    this._settings = Lib.getSettings(Me);
+    ExtensionUtils.initTranslations();
+    this._settings = ExtensionUtils.getSettings();
 
     this._store = new Gtk.ListStore();
     this._store.set_column_types([Gio.AppInfo, GObject.TYPE_STRING, Gio.Icon]);
@@ -375,37 +215,84 @@ const Widget = new GObject.Class({
   }
 });
 
+/**
+ * PrefsWidget
+ */
+const PrefsWidget = GObject.registerClass({
+  GTypeName: 'PrefsWidget',
+  Template: Me.dir.get_child('prefs.ui').get_uri(),
+  InternalChildren: [
+    'font_color',
+    'background_color',
+    'use_font_color',
+    'use_background_color',
+    'chat_only',
+    'force_alerting',
+    'blink_rate',
+    'filter_type',
+    'filter_box',
+  ],
+}, class PrefsWidget extends Gtk.Box {
+
+  _init(params = {}) {
+    super._init(params);
+    this._settings = ExtensionUtils.getSettings();
+
+    // color settings
+    this._connectColorSettings('color', 'font_color', 'notify::rgba');
+    this._connectColorSettings('backgroundcolor', 'background_color', 'notify::rgba');
+
+    // boolean settings
+    this._bindSettings('usecolor', 'use_font_color', 'active');
+    this._bindSettings('usebackgroundcolor', 'use_background_color', 'active');
+    this._bindSettings('chatonly', 'chat_only', 'active');
+    this._bindSettings('force', 'force_alerting', 'active');
+
+    // int setting
+    this._bindSettings('blinkrate', 'blink_rate', 'value');
+
+    // filter type setting
+    this._widget('filter_type').set_active(this._settings.get_int('filter'));
+    this._widget('filter_type').connect('changed', comboBox => {
+      this._settings.set_int('filter', comboBox.get_active());
+    });
+
+    // filter list
+    this._widget('filter_box').append(_createFilterListSetting());
+  }
+
+  _widget(id) {
+    const name = '_' + id;
+    if (!this[name]) {
+        throw `Unknown widget with ID "${id}"!`;
+    }
+    return this[name];
+  }
+
+  _connectColorSettings(settingsKey, widgetId, signal) {
+    this._widget(widgetId).set_rgba(Lib.getRGBAColor(this._settings.get_string(settingsKey)));
+    this._widget(widgetId).connect(signal, button => {
+      let rgba = button.get_rgba().to_string();
+      this._settings.set_string(settingsKey, rgba);
+    });
+  }
+
+  _bindSettings(settingsKey, widgetId, widgetProperty, flag = Gio.SettingsBindFlags.DEFAULT) {
+      const widget = this._widget(widgetId);
+      this._settings.bind(settingsKey, widget, widgetProperty, flag);
+      this._settings.bind_writable(settingsKey, widget, 'sensitive', false);
+  }
+});
+
+
+/**
+ * Shell-extensions handlers
+ */
+
+function init() {
+  ExtensionUtils.initTranslations('gnome-shell-notifications-alert');
+}
+
 function buildPrefsWidget() {
-  let frame = new Gtk.Box({orientation: Gtk.Orientation.VERTICAL});
-  let vbox = new Gtk.Box({orientation: Gtk.Orientation.VERTICAL, spacing: 5,
-                          margin_top: 10, margin_bottom: 20, margin_start: 20, margin_end: 20});
-  let setting;
-
-  // Add all color settings
-  for (setting in colorSettings) {
-    let hbox = _createColorSetting(setting);
-    vbox.append(hbox);
-  }
-  // Add all bool settings
-  for (setting in boolSettings) {
-    let hbox = _createBoolSetting(setting);
-    vbox.append(hbox);
-  }
-  // Add all int settings
-  for (setting in intSettings) {
-    let hbox = _createIntSetting(setting);
-    vbox.append(hbox);
-  }
-
-  // Add filter type setting
-  let filterType = _createFilterTypeSetting();
-  vbox.append(filterType);
-
-  // Add filter list
-  let blbox = _createFilterListSetting();
-  vbox.append(blbox);
-
-  frame.append(vbox);
-
-  return frame;
+  return new PrefsWidget();
 }
