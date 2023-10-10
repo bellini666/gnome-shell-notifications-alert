@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface domain="gnome-shell-notifications-alert">
-  <template class="PrefsWidget" parent="GtkBox">
-    <property name="visible">True</property>
-    <property name="can-focus">True</property>
-    <property name="orientation">vertical</property>
-    <property name="spacing">15</property>
+  <object class="AdwPreferencesPage" id='prefs'>
     <child>
       <object class="GtkBox">
         <property name="visible">True</property>
@@ -224,5 +220,5 @@
         </child>
       </object>
     </child>
-  </template>
+  </object>
 </interface>
