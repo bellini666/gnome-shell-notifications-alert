@@ -259,7 +259,7 @@ export default class NotificationsAlertPreferences extends ExtensionPreferences 
 
     builder.add_from_file(this.path + '/prefs.ui');
 
-    const prefs = builder.get_object('prefs')
+    const prefs = builder.get_object('notifications-alert_page_settings')
     window.add(prefs);
     this._prefs(builder, this.getSettings());
   }

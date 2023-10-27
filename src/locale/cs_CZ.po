@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-25 10:34+0100\n"
+"POT-Creation-Date: 2023-10-27 16:49+0200\n"
 "PO-Revision-Date: 2020-02-23 10:15+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,101 +18,114 @@ msgstr ""
 "X-Generator: Poedit 2.0.1\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
-#: src/prefs.js:114
+#: src/prefs.js:109
 msgid "Add"
 msgstr "Přidat"
 
-#: src/prefs.js:96
+#: src/prefs.js:91
 msgid "Add Rule"
 msgstr "Přidat pravidlo"
 
-#: src/prefs.ui:55
+#: src/prefs.ui:21
 msgid "Alert background color"
 msgstr "Barva pozadí výstrahy"
 
-#: src/prefs.ui:148 src/prefs.ui:159
+#: src/prefs.ui:75 src/prefs.ui:79
 msgid "Alert even if you set notifications to OFF on user menu (default: OFF)"
 msgstr ""
-"Výstrahy i když je zobrazování upozorňování v uživatelské nabídce "
-"vypnuto (výchozí: vypnuto)"
+"Výstrahy i když je zobrazování upozorňování v uživatelské nabídce vypnuto "
+"(výchozí: vypnuto)"
 
-#: src/prefs.ui:30
+#: src/prefs.ui:9
 msgid "Alert font color"
 msgstr "Barva písma výstrahy"
 
-#: src/prefs.js:80
+#: src/prefs.js:75
 msgid "Application"
 msgstr "Aplikace"
 
-#: src/prefs.ui:214
+#: src/prefs.ui:59
+msgid "Behavior"
+msgstr ""
+
+#: src/prefs.ui:115
 msgid "Blacklist"
 msgstr "Seznam vyloučených"
 
-#: src/prefs.js:109
+#: src/prefs.js:104
 msgid "Blacklist app"
 msgstr "Zařadit aplikaci na seznam vyloučených"
 
-#: src/prefs.ui:176
+#: src/prefs.ui:86
 msgid "Blink rate (in ms)"
 msgstr "Rychlost blikání (v ms)"
 
-#: src/prefs.js:119
+#: src/prefs.js:114
 msgid "Choose an application to blacklist:"
 msgstr "Zvolte aplikaci pro zařazení na seznam vyloučených:"
 
-#: src/prefs.js:44
+#: src/prefs.ui:6
+msgid "Colors"
+msgstr ""
+
+#: src/prefs.ui:107
+#, fuzzy
+msgid "Filter"
+msgstr "Seznam filtru"
+
+#: src/prefs.js:40
 msgid "Filter List"
 msgstr "Seznam filtru"
 
-#: src/prefs.ui:206
+#: src/prefs.ui:110
 msgid "Filter Type"
 msgstr "Typ filtru"
 
-#: src/prefs.ui:152
+#: src/prefs.ui:74
 msgid "Force alerting even when notifications are set to OFF"
 msgstr "Zvýrazňovat i pokud jsou upozorňování vypnuta"
 
-#: src/prefs.ui:128
+#: src/prefs.ui:62
 msgid "Only alert for chat notifications"
 msgstr "Zobrazovat výstrahy pouze na zprávy konverzací"
 
-#: src/prefs.ui:124 src/prefs.ui:135
+#: src/prefs.ui:63 src/prefs.ui:67
 msgid ""
 "Only chat notifications (like Empathy ones) will get alerted (default: OFF)"
 msgstr ""
 "Výstrahy budou zobrazovány pouze pro zprávy konverzací – např. Empathy "
 "(výchozí: vypnuto)"
 
-#: src/prefs.ui:51 src/prefs.ui:63
+#: src/prefs.ui:22 src/prefs.ui:26
 msgid "The background color used to paint the message on user's menu"
 msgstr "Barva pozadí, kterou je zobrazena zpráva v uživatelské nabídce"
 
-#: src/prefs.ui:26 src/prefs.ui:38
+#: src/prefs.ui:10 src/prefs.ui:14
 msgid "The color used to paint the message on user's menu"
 msgstr "Barva, kterou je zobrazena zpráva v uživatelské nabídce"
 
-#: src/prefs.ui:172 src/prefs.ui:189
+#: src/prefs.ui:87 src/prefs.ui:97
 msgid "The rate that the alert blinks, in ms. 0 means no blink (default: 800)"
 msgstr ""
 "Určuje, jakou rychlostí má problikávat zvýrazňující a výchozí barva "
 "(800=výchozí hodnota, méně=rychleji, více=pomaleji, 0=žádné blikání)"
 
-#: src/prefs.ui:104
+#: src/prefs.ui:45
 msgid "Use alert background color"
 msgstr "Použít barvu pozadí výstrahy"
 
-#: src/prefs.ui:80
+#: src/prefs.ui:33
 msgid "Use alert font color"
 msgstr "Použít barvu písma výstrahy"
 
-#: src/prefs.ui:100 src/prefs.ui:111
+#: src/prefs.ui:46 src/prefs.ui:50
 msgid "Use the alert background color for alert blinks (default: OFF)"
 msgstr "Blikat barvou jakou má pozadí výstrahy (výchozí: vypnuto)"
 
-#: src/prefs.ui:76 src/prefs.ui:87
+#: src/prefs.ui:34 src/prefs.ui:38
 msgid "Use the alert font color for alert blinks (default: ON)"
 msgstr "Blikat barvou jakou má písmo výstrahy (výchozí: zapnuto)"
 
-#: src/prefs.ui:215
+#: src/prefs.ui:116
 msgid "Whitelist"
 msgstr "Seznam povolených"
