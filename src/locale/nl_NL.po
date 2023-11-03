@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-25 10:34+0100\n"
+"POT-Creation-Date: 2023-10-27 16:49+0200\n"
 "PO-Revision-Date: 2019-08-06 12:16+0200\n"
 "Last-Translator: Heimen Stoffels <vistausss@outlook.com>\n"
 "Language-Team: \n"
@@ -18,106 +18,119 @@ msgstr ""
 "X-Generator: Poedit 2.2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/prefs.js:114
+#: src/prefs.js:109
 msgid "Add"
 msgstr "Toevoegen"
 
-#: src/prefs.js:96
+#: src/prefs.js:91
 msgid "Add Rule"
 msgstr "Regel toevoegen"
 
-#: src/prefs.ui:55
+#: src/prefs.ui:21
 #, fuzzy
 msgid "Alert background color"
 msgstr "Meldingskleur"
 
-#: src/prefs.ui:148 src/prefs.ui:159
+#: src/prefs.ui:75 src/prefs.ui:79
 msgid "Alert even if you set notifications to OFF on user menu (default: OFF)"
 msgstr ""
 "Ook knipperen bij nieuwe meldingen als meldingen zijn uitgeschakeld "
 "(standaard: UIT)"
 
-#: src/prefs.ui:30
+#: src/prefs.ui:9
 #, fuzzy
 msgid "Alert font color"
 msgstr "Meldingskleur"
 
-#: src/prefs.js:80
+#: src/prefs.js:75
 msgid "Application"
 msgstr "Toepassing"
 
-#: src/prefs.ui:214
+#: src/prefs.ui:59
+msgid "Behavior"
+msgstr ""
+
+#: src/prefs.ui:115
 msgid "Blacklist"
 msgstr "Zwarte lijst"
 
-#: src/prefs.js:109
+#: src/prefs.js:104
 msgid "Blacklist app"
 msgstr "Toev. aan zwarte lijst"
 
-#: src/prefs.ui:176
+#: src/prefs.ui:86
 msgid "Blink rate (in ms)"
 msgstr "Knippersnelheid (in ms)"
 
-#: src/prefs.js:119
+#: src/prefs.js:114
 msgid "Choose an application to blacklist:"
 msgstr "Kies een toepassing voor de zwarte lijst:"
 
-#: src/prefs.js:44
+#: src/prefs.ui:6
+msgid "Colors"
+msgstr ""
+
+#: src/prefs.ui:107
+#, fuzzy
+msgid "Filter"
+msgstr "Filterlijst"
+
+#: src/prefs.js:40
 msgid "Filter List"
 msgstr "Filterlijst"
 
-#: src/prefs.ui:206
+#: src/prefs.ui:110
 msgid "Filter Type"
 msgstr "Soort filter"
 
-#: src/prefs.ui:152
+#: src/prefs.ui:74
 msgid "Force alerting even when notifications are set to OFF"
 msgstr ""
 "Knipperen bij nieuwe meldingen afdwingen als meldingen zijn uitgeschakeld"
 
-#: src/prefs.ui:128
+#: src/prefs.ui:62
 msgid "Only alert for chat notifications"
 msgstr "Alleen knipperen bij chatmeldingen"
 
-#: src/prefs.ui:124 src/prefs.ui:135
+#: src/prefs.ui:63 src/prefs.ui:67
 msgid ""
 "Only chat notifications (like Empathy ones) will get alerted (default: OFF)"
 msgstr ""
 "Alleen knipperen bij chatmeldingen (zoals bijv. die van Empathy - standaard: "
 "UIT)"
 
-#: src/prefs.ui:51 src/prefs.ui:63
+#: src/prefs.ui:22 src/prefs.ui:26
 #, fuzzy
 msgid "The background color used to paint the message on user's menu"
 msgstr "De kleur van het knipperpatroon"
 
-#: src/prefs.ui:26 src/prefs.ui:38
+#: src/prefs.ui:10 src/prefs.ui:14
 msgid "The color used to paint the message on user's menu"
 msgstr "De kleur van het knipperpatroon"
 
-#: src/prefs.ui:172 src/prefs.ui:189
+#: src/prefs.ui:87 src/prefs.ui:97
 msgid "The rate that the alert blinks, in ms. 0 means no blink (default: 800)"
 msgstr ""
 "De snelheid waarmee wordt geknipperd, in ms. 0 = niet knipperen (standaard: "
 "800)"
 
-#: src/prefs.ui:104
+#: src/prefs.ui:45
 msgid "Use alert background color"
 msgstr ""
 
-#: src/prefs.ui:80
+#: src/prefs.ui:33
 #, fuzzy
 msgid "Use alert font color"
 msgstr "Meldingskleur"
 
-#: src/prefs.ui:100 src/prefs.ui:111
+#: src/prefs.ui:46 src/prefs.ui:50
 msgid "Use the alert background color for alert blinks (default: OFF)"
 msgstr ""
 
-#: src/prefs.ui:76 src/prefs.ui:87
+#: src/prefs.ui:34 src/prefs.ui:38
 msgid "Use the alert font color for alert blinks (default: ON)"
 msgstr ""
 
-#: src/prefs.ui:215
+#: src/prefs.ui:116
 msgid "Whitelist"
 msgstr "Witte lijst"

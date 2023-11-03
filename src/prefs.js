@@ -20,19 +20,15 @@
  *
  */
 
-const GObject = imports.gi.GObject;
-const Gio = imports.gi.Gio;
-const Gtk = imports.gi.Gtk;
+import GObject from 'gi://GObject';
+import Gio from 'gi://Gio';
+import Gtk from 'gi://Gtk';
 
-const Gettext = imports.gettext.domain('gnome-shell-notifications-alert');
-const _ = Gettext.gettext;
+import * as Lib from './lib.js';
 
-const ExtensionUtils = imports.misc.extensionUtils;
-const Me = ExtensionUtils.getCurrentExtension();
-const Lib = Me.imports.lib;
+import {ExtensionPreferences, gettext as _} from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
 const SETTING_BLACKLIST = 'application-list';
-const SETTING_FILTER_TYPE = 'filter';
 
 const Columns = {
   APPINFO: 0,
@@ -40,9 +36,9 @@ const Columns = {
   ICON: 2,
 };
 
-function _createFilterListSetting() {
+function _createFilterListSetting(extensionObject) {
   let settingLabel = new Gtk.Label({label: _("Filter List"), xalign: 0});
-  let widget = new Widget();
+  let widget = new Widget(extensionObject);
   let blbox = new Gtk.Grid({column_spacing: 5, row_spacing: 5});
   blbox.attach(settingLabel,0,0,1,1);
   blbox.attach(widget,0,1,1,1);
@@ -57,12 +53,11 @@ const Widget = new GObject.Class({
   GTypeName: 'NotificationsAlertBlackListPrefsWidget',
   Extends: Gtk.Box,
 
-  _init: function(params) {
+  _init: function(extensionObject, params) {
     this.parent(params);
     this.set_orientation(Gtk.Orientation.VERTICAL);
 
-    ExtensionUtils.initTranslations();
-    this._settings = ExtensionUtils.getSettings();
+    this._settings = extensionObject.getSettings();
 
     this._store = new Gtk.ListStore();
     this._store.set_column_types([Gio.AppInfo, GObject.TYPE_STRING, Gio.Icon]);
@@ -216,83 +211,56 @@ const Widget = new GObject.Class({
 });
 
 /**
- * PrefsWidget
+ * Preferences Window
  */
-const PrefsWidget = GObject.registerClass({
-  GTypeName: 'PrefsWidget',
-  Template: Me.dir.get_child('prefs.ui').get_uri(),
-  InternalChildren: [
-    'font_color',
-    'background_color',
-    'use_font_color',
-    'use_background_color',
-    'chat_only',
-    'force_alerting',
-    'blink_rate',
-    'filter_type',
-    'filter_box',
-  ],
-}, class PrefsWidget extends Gtk.Box {
+export default class NotificationsAlertPreferences extends ExtensionPreferences {
 
-  _init(params = {}) {
-    super._init(params);
-    this._settings = ExtensionUtils.getSettings();
+  _prefs(builder, settings) {
 
     // color settings
-    this._connectColorSettings('color', 'font_color', 'notify::rgba');
-    this._connectColorSettings('backgroundcolor', 'background_color', 'notify::rgba');
+    this._connectColorSettings(settings, 'color', builder.get_object('font_color'), 'notify::rgba');
+    this._connectColorSettings(settings, 'backgroundcolor', builder.get_object('background_color'), 'notify::rgba');
 
     // boolean settings
-    this._bindSettings('usecolor', 'use_font_color', 'active');
-    this._bindSettings('usebackgroundcolor', 'use_background_color', 'active');
-    this._bindSettings('chatonly', 'chat_only', 'active');
-    this._bindSettings('force', 'force_alerting', 'active');
+    this._bindSettings(settings, 'usecolor', builder.get_object('use_font_color'), 'active');
+    this._bindSettings(settings, 'usebackgroundcolor', builder.get_object('use_background_color'), 'active');
+    this._bindSettings(settings, 'chatonly', builder.get_object('chat_only'), 'active');
+    this._bindSettings(settings, 'force', builder.get_object('force_alerting'), 'active');
 
     // int setting
-    this._bindSettings('blinkrate', 'blink_rate', 'value');
+    this._bindSettings(settings, 'blinkrate', builder.get_object('blink_rate'), 'value');
 
     // filter type setting
-    this._widget('filter_type').set_active(this._settings.get_int('filter'));
-    this._widget('filter_type').connect('changed', comboBox => {
-      this._settings.set_int('filter', comboBox.get_active());
+    builder.get_object('filter_type').set_active(settings.get_int('filter'));
+    builder.get_object('filter_type').connect('changed', comboBox => {
+      settings.set_int('filter', comboBox.get_active());
     });
 
     // filter list
-    this._widget('filter_box').append(_createFilterListSetting());
+    builder.get_object('filter_box').append(_createFilterListSetting(this));
   }
 
-  _widget(id) {
-    const name = '_' + id;
-    if (!this[name]) {
-        throw `Unknown widget with ID "${id}"!`;
-    }
-    return this[name];
-  }
-
-  _connectColorSettings(settingsKey, widgetId, signal) {
-    this._widget(widgetId).set_rgba(Lib.getRGBAColor(this._settings.get_string(settingsKey)));
-    this._widget(widgetId).connect(signal, button => {
+  _connectColorSettings(settings, settingsKey, widget, signal) {
+    widget.set_rgba(Lib.getRGBAColor(settings.get_string(settingsKey)));
+    widget.connect(signal, button => {
       let rgba = button.get_rgba().to_string();
-      this._settings.set_string(settingsKey, rgba);
+      settings.set_string(settingsKey, rgba);
     });
   }
 
-  _bindSettings(settingsKey, widgetId, widgetProperty, flag = Gio.SettingsBindFlags.DEFAULT) {
-      const widget = this._widget(widgetId);
-      this._settings.bind(settingsKey, widget, widgetProperty, flag);
-      this._settings.bind_writable(settingsKey, widget, 'sensitive', false);
+  _bindSettings(settings, settingsKey, widget, widgetProperty, flag = Gio.SettingsBindFlags.DEFAULT) {
+      settings.bind(settingsKey, widget, widgetProperty, flag);
+      settings.bind_writable(settingsKey, widget, 'sensitive', false);
   }
-});
 
+  // Shell-extension handler
+  fillPreferencesWindow(window) {
+    let builder = Gtk.Builder.new();
 
-/**
- * Shell-extensions handlers
- */
+    builder.add_from_file(this.path + '/prefs.ui');
 
-function init() {
-  ExtensionUtils.initTranslations('gnome-shell-notifications-alert');
-}
-
-function buildPrefsWidget() {
-  return new PrefsWidget();
+    const prefs = builder.get_object('notifications-alert_page_settings')
+    window.add(prefs);
+    this._prefs(builder, this.getSettings());
+  }
 }

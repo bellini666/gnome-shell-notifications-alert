@@ -1,10 +1,6 @@
 {
   "shell-version": [
-    "40",
-    "41",
-    "42",
-    "43",
-    "44"
+    "45"
   ],
   "gettext-domain": "gnome-shell-notifications-alert",
   "settings-schema": "org.gnome.shell.extensions.notifications-alert",

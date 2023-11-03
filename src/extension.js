@@ -22,15 +22,15 @@
  *
  */
 
-const { Clutter, St } = imports.gi;
-const Mainloop = imports.mainloop;
-const Main = imports.ui.main;
-const MessageTray = imports.ui.messageTray;
-const GnomeSession = imports.misc.gnomeSession;
+import Clutter from 'gi://Clutter';
+import GLib from 'gi://GLib';
+import * as Main from 'resource:///org/gnome/shell/ui/main.js';
+import * as MessageTray from 'resource:///org/gnome/shell/ui/messageTray.js';
+import * as GnomeSession from 'resource:///org/gnome/shell/misc/gnomeSession.js';
 
-const ExtensionUtils = imports.misc.extensionUtils;
-const Me = ExtensionUtils.getCurrentExtension();
-const Lib = Me.imports.lib;
+import * as Lib from './lib.js';
+
+import {Extension} from 'resource:///org/gnome/shell/extensions/extension.js';
 
 const SETTING_BLINK_RATE = 'blinkrate';
 const SETTING_USECOLOR = 'usecolor';
@@ -199,8 +199,8 @@ function _MessageStyleHandler() {
     this._hasStyleAdded = true;
 
     if (loopDelay > 0) {
-      this._loopTimeoutId = Mainloop.timeout_add(
-          loopDelay, this._toggleStyle.bind(this))
+      this._loopTimeoutId = GLib.timeout_add(
+        GLib.PRIORITY_DEFAULT, loopDelay, this._toggleStyle.bind(this))
     } else {
       this._toggleStyle();
     }
@@ -209,7 +209,7 @@ function _MessageStyleHandler() {
   this._removeMessageStyle = function() {
     if (this._loopTimeoutId != null) {
       // Stop the looping
-      Mainloop.source_remove(this._loopTimeoutId);
+      GLib.source_remove(this._loopTimeoutId);
       this._loopTimeoutId = null;
     }
     
@@ -257,37 +257,35 @@ function _destroy() {
 /*
    Shell-extensions handlers
 */
+export default class NotificationsAlert extends Extension {
 
-function init() {
-  ExtensionUtils.initTranslations();
-}
+  enable() {
+    settings = this.getSettings();
 
-function enable() {
-  settings = ExtensionUtils.getSettings();
+    messageStyleHandler = new _MessageStyleHandler();
+    messageStyleHandler.init();
 
-  messageStyleHandler = new _MessageStyleHandler();
-  messageStyleHandler.init();
+    if (MessageTray.Source.prototype.countUpdated == _countUpdated) {
+      return;
+    }
+    originalCountUpdated = MessageTray.Source.prototype.countUpdated;
+    originalDestroy = MessageTray.Source.prototype.destroy;
 
-  if (MessageTray.Source.prototype.countUpdated == _countUpdated) {
-    return;
+    MessageTray.Source.prototype.countUpdated = _countUpdated;
+    MessageTray.Source.prototype.destroy = _destroy;
+
+    messageStyleHandler.enable();
   }
-  originalCountUpdated = MessageTray.Source.prototype.countUpdated;
-  originalDestroy = MessageTray.Source.prototype.destroy;
 
-  MessageTray.Source.prototype.countUpdated = _countUpdated;
-  MessageTray.Source.prototype.destroy = _destroy;
+  disable() {
+    MessageTray.Source.prototype.countUpdated = originalCountUpdated;
+    MessageTray.Source.prototype.destroy = originalDestroy;
 
-  messageStyleHandler.enable();
-}
+    messageStyleHandler.disable();
 
-function disable() {
-  MessageTray.Source.prototype.countUpdated = originalCountUpdated;
-  MessageTray.Source.prototype.destroy = originalDestroy;
-
-  messageStyleHandler.disable();
-
-  settings = null;
-  messageStyleHandler = null;
-  originalCountUpdated = null;
-  originalDestroy = null;
+    settings = null;
+    messageStyleHandler = null;
+    originalCountUpdated = null;
+    originalDestroy = null;
+  }
 }
