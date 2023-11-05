@@ -20,23 +20,8 @@
  *
  */
 
-import Gdk from 'gi://Gdk';
 import Gio from 'gi://Gio';
 
-/*
-   Color utils
- */
-
-export function getRGBAColor(rgba) {
-  let color = new Gdk.RGBA();
-
-  if (!color.parse(rgba)) {
-    // On any error, default to red
-    color = new Gdk.RGBA({red: 1.0, alpha: 1.0});
-  }
-
-  return color;
-}
 
 export function getAppNamesFromAppInfos(list) {
   let appNames = [ ];

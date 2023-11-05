@@ -23,8 +23,8 @@
 import GObject from 'gi://GObject';
 import Gio from 'gi://Gio';
 import Gtk from 'gi://Gtk';
+import Gdk from 'gi://Gdk';
 
-import * as Lib from './lib.js';
 
 import {ExtensionPreferences, gettext as _} from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
@@ -241,7 +241,12 @@ export default class NotificationsAlertPreferences extends ExtensionPreferences 
   }
 
   _connectColorSettings(settings, settingsKey, widget, signal) {
-    widget.set_rgba(Lib.getRGBAColor(settings.get_string(settingsKey)));
+    let color = new Gdk.RGBA();
+    if (!color.parse(settings.get_string(settingsKey))) {
+      // On any error, default to red
+      color = new Gdk.RGBA({red: 1.0, alpha: 1.0});
+    }
+    widget.set_rgba(color);
     widget.connect(signal, button => {
       let rgba = button.get_rgba().to_string();
       settings.set_string(settingsKey, rgba);
