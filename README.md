@@ -1,7 +1,7 @@
 # Notifications Alert for Gnome Shell #
 
-Whenever there is an unread notification (e.g. chat messages), it will blink
-the message menu with a color chosen by the user.
+Changes the color of the time and date indicator in the top bar when there are
+unread notifications. Colors and blinking are customizable.
 
 ## How to install
 
