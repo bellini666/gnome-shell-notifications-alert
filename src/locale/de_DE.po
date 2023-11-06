@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-notifications-alert\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-27 16:49+0200\n"
-"PO-Revision-Date: 2023-10-27 16:52+0200\n"
+"POT-Creation-Date: 2023-11-06 10:19+0100\n"
+"PO-Revision-Date: 2023-11-06 10:31+0100\n"
 "Last-Translator: Onno Giesmann <nutzer3105@gmail.com>\n"
 "Language-Team: German <--->\n"
 "Language: de\n"
@@ -32,10 +32,12 @@ msgid "Alert background color"
 msgstr "Hintergrundfarbe bei Benachrichtigung"
 
 #: src/prefs.ui:75 src/prefs.ui:79
-msgid "Alert even if you set notifications to OFF on user menu (default: OFF)"
-msgstr ""
-"Benachrichtigungen auch dann anzeigen, wenn sie im Nutzermenü ausgeschaltet "
-"sind (Vorgabe: AUS)"
+msgid "Alert even if you enable 'Do Not Disturb' (default: OFF)"
+msgstr "Benachrichtigt auch, wenn 'Nicht stören' aktiviert ist (Vorgabe: AUS)"
+
+#: src/prefs.ui:74
+msgid "Alert even when 'Do Not Disturb' is enabled"
+msgstr "Auch benachrichtigen, wenn 'Nicht stören' aktiviert ist"
 
 #: src/prefs.ui:9
 msgid "Alert font color"
@@ -81,13 +83,9 @@ msgstr "Filterliste"
 msgid "Filter Type"
 msgstr "Filtertyp"
 
-#: src/prefs.ui:74
-msgid "Force alerting even when notifications are set to OFF"
-msgstr "Auch benachrichtigen, wenn sie allgemein auf AUS gestellt sind"
-
 #: src/prefs.ui:62
 msgid "Only alert for chat notifications"
-msgstr "Nur bei Chat-Benachrichtigungen aktivieren"
+msgstr "Nur bei Chat-Meldungen benachrichtigen"
 
 #: src/prefs.ui:63 src/prefs.ui:67
 msgid ""

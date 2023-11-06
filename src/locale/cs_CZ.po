@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-27 16:49+0200\n"
+"POT-Creation-Date: 2023-11-06 10:19+0100\n"
 "PO-Revision-Date: 2020-02-23 10:15+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -31,10 +31,16 @@ msgid "Alert background color"
 msgstr "Barva pozadí výstrahy"
 
 #: src/prefs.ui:75 src/prefs.ui:79
-msgid "Alert even if you set notifications to OFF on user menu (default: OFF)"
+#, fuzzy
+msgid "Alert even if you enable 'Do Not Disturb' (default: OFF)"
 msgstr ""
 "Výstrahy i když je zobrazování upozorňování v uživatelské nabídce vypnuto "
 "(výchozí: vypnuto)"
+
+#: src/prefs.ui:74
+#, fuzzy
+msgid "Alert even when 'Do Not Disturb' is enabled"
+msgstr "Zvýrazňovat i pokud jsou upozorňování vypnuta"
 
 #: src/prefs.ui:9
 msgid "Alert font color"
@@ -80,10 +86,6 @@ msgstr "Seznam filtru"
 #: src/prefs.ui:110
 msgid "Filter Type"
 msgstr "Typ filtru"
-
-#: src/prefs.ui:74
-msgid "Force alerting even when notifications are set to OFF"
-msgstr "Zvýrazňovat i pokud jsou upozorňování vypnuta"
 
 #: src/prefs.ui:62
 msgid "Only alert for chat notifications"
