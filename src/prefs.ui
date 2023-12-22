@@ -71,12 +71,12 @@
         </child>
         <child>
           <object class="AdwActionRow">
-            <property name="title" translatable="yes">Force alerting even when notifications are set to OFF</property>
-            <property name="tooltip-text" translatable="yes">Alert even if you set notifications to OFF on user menu (default: OFF)</property>
+            <property name="title" translatable="yes">Alert even when 'Do Not Disturb' is enabled</property>
+            <property name="tooltip-text" translatable="yes">Alert even if you enable 'Do Not Disturb' (default: OFF)</property>
             <child>
               <object class="GtkSwitch" id="force_alerting">
                 <property name="valign">center</property>
-                <property name="tooltip-text" translatable="yes">Alert even if you set notifications to OFF on user menu (default: OFF)</property>
+                <property name="tooltip-text" translatable="yes">Alert even if you enable 'Do Not Disturb' (default: OFF)</property>
               </object>
             </child>
           </object>

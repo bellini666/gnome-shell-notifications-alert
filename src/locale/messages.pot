@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-27 16:49+0200\n"
+"POT-Creation-Date: 2023-11-06 10:19+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,7 +30,11 @@ msgid "Alert background color"
 msgstr ""
 
 #: src/prefs.ui:75 src/prefs.ui:79
-msgid "Alert even if you set notifications to OFF on user menu (default: OFF)"
+msgid "Alert even if you enable 'Do Not Disturb' (default: OFF)"
+msgstr ""
+
+#: src/prefs.ui:74
+msgid "Alert even when 'Do Not Disturb' is enabled"
 msgstr ""
 
 #: src/prefs.ui:9
@@ -75,10 +79,6 @@ msgstr ""
 
 #: src/prefs.ui:110
 msgid "Filter Type"
-msgstr ""
-
-#: src/prefs.ui:74
-msgid "Force alerting even when notifications are set to OFF"
 msgstr ""
 
 #: src/prefs.ui:62

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-notifications-alert\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-27 16:49+0200\n"
+"POT-Creation-Date: 2023-11-06 10:19+0100\n"
 "PO-Revision-Date: 2013-02-02 17:09-0200\n"
 "Last-Translator: Thiago Bellini <hackedbellini@gmail.com>\n"
 "Language-Team: Brazilian Portuguese\n"
@@ -30,10 +30,16 @@ msgid "Alert background color"
 msgstr "Cor de fundo do alerta"
 
 #: src/prefs.ui:75 src/prefs.ui:79
-msgid "Alert even if you set notifications to OFF on user menu (default: OFF)"
+#, fuzzy
+msgid "Alert even if you enable 'Do Not Disturb' (default: OFF)"
 msgstr ""
 "Alertar mesmo se as suas notificações estão desligadas no menu do usuário "
 "(padrão: Desligado)"
+
+#: src/prefs.ui:74
+#, fuzzy
+msgid "Alert even when 'Do Not Disturb' is enabled"
+msgstr "Alerta forçado mesmo quando as notificações estão desligadas"
 
 #: src/prefs.ui:9
 msgid "Alert font color"
@@ -79,10 +85,6 @@ msgstr "Lista do filtro"
 #: src/prefs.ui:110
 msgid "Filter Type"
 msgstr "Tipo do filtro"
-
-#: src/prefs.ui:74
-msgid "Force alerting even when notifications are set to OFF"
-msgstr "Alerta forçado mesmo quando as notificações estão desligadas"
 
 #: src/prefs.ui:62
 msgid "Only alert for chat notifications"
