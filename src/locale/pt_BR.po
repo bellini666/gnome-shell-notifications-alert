@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-notifications-alert\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-06 10:19+0100\n"
-"PO-Revision-Date: 2013-02-02 17:09-0200\n"
+"POT-Creation-Date: 2023-12-22 11:45-0300\n"
+"PO-Revision-Date: 2023-12-22 11:45-0300\n"
 "Last-Translator: Thiago Bellini <hackedbellini@gmail.com>\n"
 "Language-Team: Brazilian Portuguese\n"
 "Language: pt_BR\n"
@@ -30,16 +30,13 @@ msgid "Alert background color"
 msgstr "Cor de fundo do alerta"
 
 #: src/prefs.ui:75 src/prefs.ui:79
-#, fuzzy
 msgid "Alert even if you enable 'Do Not Disturb' (default: OFF)"
 msgstr ""
-"Alertar mesmo se as suas notificações estão desligadas no menu do usuário "
-"(padrão: Desligado)"
+"Alerta mesmo se você tiver habilitado 'Não Perturbar' (padrão: Desligado)"
 
 #: src/prefs.ui:74
-#, fuzzy
 msgid "Alert even when 'Do Not Disturb' is enabled"
-msgstr "Alerta forçado mesmo quando as notificações estão desligadas"
+msgstr "Alerta mesmo se 'Não Perturbar' estiver habilitado"
 
 #: src/prefs.ui:9
 msgid "Alert font color"
@@ -51,7 +48,7 @@ msgstr "Aplicativo"
 
 #: src/prefs.ui:59
 msgid "Behavior"
-msgstr ""
+msgstr "Comportamento"
 
 #: src/prefs.ui:115
 msgid "Blacklist"
@@ -71,12 +68,11 @@ msgstr "Escolha um aplicativo para adicionar na lista negra:"
 
 #: src/prefs.ui:6
 msgid "Colors"
-msgstr ""
+msgstr "Cores"
 
 #: src/prefs.ui:107
-#, fuzzy
 msgid "Filter"
-msgstr "Lista do filtro"
+msgstr "Filtro"
 
 #: src/prefs.js:40
 msgid "Filter List"
