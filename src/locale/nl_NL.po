@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-11-06 10:19+0100\n"
-"PO-Revision-Date: 2019-08-06 12:16+0200\n"
+"PO-Revision-Date: 2023-12-22 14:12+0100\n"
 "Last-Translator: Heimen Stoffels <vistausss@outlook.com>\n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4\n"
 
 #: src/prefs.js:109
 msgid "Add"
@@ -27,27 +27,20 @@ msgid "Add Rule"
 msgstr "Regel toevoegen"
 
 #: src/prefs.ui:21
-#, fuzzy
 msgid "Alert background color"
-msgstr "Meldingskleur"
+msgstr ""
 
 #: src/prefs.ui:75 src/prefs.ui:79
-#, fuzzy
 msgid "Alert even if you enable 'Do Not Disturb' (default: OFF)"
 msgstr ""
-"Ook knipperen bij nieuwe meldingen als meldingen zijn uitgeschakeld "
-"(standaard: UIT)"
 
 #: src/prefs.ui:74
-#, fuzzy
 msgid "Alert even when 'Do Not Disturb' is enabled"
 msgstr ""
-"Knipperen bij nieuwe meldingen afdwingen als meldingen zijn uitgeschakeld"
 
 #: src/prefs.ui:9
-#, fuzzy
 msgid "Alert font color"
-msgstr "Meldingskleur"
+msgstr ""
 
 #: src/prefs.js:75
 msgid "Application"
@@ -78,9 +71,8 @@ msgid "Colors"
 msgstr ""
 
 #: src/prefs.ui:107
-#, fuzzy
 msgid "Filter"
-msgstr "Filterlijst"
+msgstr ""
 
 #: src/prefs.js:40
 msgid "Filter List"
@@ -102,9 +94,8 @@ msgstr ""
 "UIT)"
 
 #: src/prefs.ui:22 src/prefs.ui:26
-#, fuzzy
 msgid "The background color used to paint the message on user's menu"
-msgstr "De kleur van het knipperpatroon"
+msgstr ""
 
 #: src/prefs.ui:10 src/prefs.ui:14
 msgid "The color used to paint the message on user's menu"
@@ -121,9 +112,8 @@ msgid "Use alert background color"
 msgstr ""
 
 #: src/prefs.ui:33
-#, fuzzy
 msgid "Use alert font color"
-msgstr "Meldingskleur"
+msgstr ""
 
 #: src/prefs.ui:46 src/prefs.ui:50
 msgid "Use the alert background color for alert blinks (default: OFF)"
