@@ -23,7 +23,7 @@
       <description>Use the alert fontcolor for alert blinks</description>
     </key>
     <key name="color" type="s">
-      <default>'#ff0000'</default>
+      <default>'#f7393d'</default>
       <summary>Alert font color</summary>
       <description>The color used to paint the message on user's menu</description>
     </key>
